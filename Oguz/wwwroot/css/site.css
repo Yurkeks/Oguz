@@ -82,3 +82,82 @@ body {
     text-align: left;
     float: none;
 }
+/*basic*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+ul {
+    margin: 0;
+}
+a:hover {
+    text-decoration: none;
+}
+/*header*/
+.basket {
+    display: flex;
+    padding-top: 5px;
+}
+#basket-sum {
+    margin-left: 15px;
+    line-height: 30px;
+}
+.basket-icon {
+    color: #000;
+    position: relative;
+}
+#basket-count {
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    z-index: 999;
+    top: -3px;
+    right: -7px;
+    background-color: #ffb5a0;
+    border-radius: 100%;
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+}
+.smallDevice-header {
+    display: none;
+}
+.nav-menu ul li a {
+    padding-right: 15px;
+}
+.bigDevice-header, .smallDevice-header {
+    background-color: rgba(242,242,242,0.9);
+    height: 60px;
+}
+.nav-brand {
+    color: #000
+}
+.bigDevice-header {
+    padding-top: 10px;
+}
+@media only screen and (max-width : 570px) {
+    .smallDevice-header {
+        display: block;
+    }
+
+    .bigDevice-header {
+        display: none;
+    }
+
+    .navbar-collapse {
+        background-color: rgba(242,242,242,0.9);
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+}
+
+.nav-brand, .navbar-brand {
+    font-size: 25px;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
