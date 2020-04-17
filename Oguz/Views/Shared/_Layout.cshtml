@@ -22,11 +22,12 @@
                         <li class="nav-item">
                             <a class=" text-dark" asp-area="" asp-controller="Home" asp-action="Index">Образцы</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class=" text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        <li class="dropdown">
+                            <a class=" text-dark" href="#">
                                 Купить
+                                <span class="caret-down"><i class="fa fa-caret-down"  aria-hidden="true"></i></span>
                             </a>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu" style="display: none">
                                 <a class="dropdown-item" href="#">Шторы</a>
                                 <a class="dropdown-item" href="#">Гардины</a>
                                 <a class="dropdown-item" href="#">Подушки</a>
@@ -144,6 +145,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/preloader.js"></script>
+    <script src="~/js/dropdown-menu.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
