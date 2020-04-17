@@ -61,6 +61,7 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  overflow-y: hidden;
 }
 
 
@@ -106,7 +107,7 @@ a:hover {
     position: absolute;
     text-align: center;
     color: #fff;
-    z-index: 999;
+    z-index: 1;
     top: -3px;
     right: -7px;
     background-color: #ffb5a0;
@@ -158,8 +159,6 @@ a:hover {
 
 
 .footer {
-    position: absolute;
-    bottom: 0;
     width: 100%;
     white-space: nowrap;
     min-height: 400px; /* Vertically center the text there */
