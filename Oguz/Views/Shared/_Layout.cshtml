@@ -5,28 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Oguz</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Animation.css" />
 </head>
 <body>
+    <div id="preloader">
+        <div class="cssload-wrench"></div>
+    </div>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Oguz</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    @*<partial name="_LoginPartial" />*@
-                    <ul class="navbar-nav flex-grow-1 ">
+        <div class="bigDevice-header ">
+            <div class="container d-flex justify-content-between align-items-center">
+                <a class="nav-brand" asp-area="" asp-controller="Home" asp-action="Index">Oguz</a>
+                <div class="nav-menu">
+                    <ul class="d-flex">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Образцы</a>
+                            <a class=" text-dark" asp-area="" asp-controller="Home" asp-action="Index">Образцы</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        <li class="dropdown">
+                            <a class=" text-dark" href="#">
                                 Купить
+                                <span class="caret-down"><i class="fa fa-caret-down"  aria-hidden="true"></i></span>
                             </a>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu" style="display: none">
                                 <a class="dropdown-item" href="#">Шторы</a>
                                 <a class="dropdown-item" href="#">Гардины</a>
                                 <a class="dropdown-item" href="#">Подушки</a>
@@ -34,15 +35,64 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Скидки</a>
+                            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Скидки</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Контакты</a>
+                            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Контакты</a>
                         </li>
                     </ul>
                 </div>
+                <div class="basket">
+                    <a href="/" class="basket-icon">
+                        <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+                        <span id="basket-count">0</span>
+                    </a>
+                    <div id="basket-sum">$0.00</div>
+                </div>
             </div>
-        </nav>
+        </div>
+        <div class="smallDevice-header">
+            <nav class="navbar navbar-expand-sm navbar-toggleable-lg navbar-light mb-3 border-bottom box-shadow">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Oguz</a>
+                    <div class="basket">
+                        <a href="/" class="basket-icon">
+                            <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+                            <span id="basket-count">0</span>
+                        </a>
+                        <div id="basket-sum">$0.00</div>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav d-flex">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Образцы</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                    Купить
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Шторы</a>
+                                    <a class="dropdown-item" href="#">Гардины</a>
+                                    <a class="dropdown-item" href="#">Подушки</a>
+                                    <a class="dropdown-item" href="#">Акссесуары</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Скидки</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Контакты</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -57,16 +107,19 @@
                 <div class="wrap-normal">Просто введи email чтобы получать уведомления о новых коллекциях и распродажах</div>
                 <br />
                 <input type="email" class="contact_email" name="contact[email]" required="" placeholder="Enter your email address...">
+
                 <input type="submit" class="action_button sign_up" value="ОК">
             </div>
         </div>
         <div class="container pt-4">
             <div class="row pb-4 d-flex justify-content-center">
+
                 <div class="col">
                     <h3 class="pb-3 pt-2 pl-40px">Logo</h3>
                     &copy; 2020 - Oguz - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 </div>
                 <div class="col">
+
                     <h3 class="pb-3 pt-2">Магазин</h3>
                     <ul>
                         <li><a href="">Шторы</a></li>
@@ -83,6 +136,7 @@
                     </ul>
                 </div>
                 <div class="col">
+
                     <h3 class="pb-3 pt-2">Контакты</h3>
                     <ul>
                         <li><a href="">email</a></li>
@@ -95,6 +149,8 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/preloader.js"></script>
+    <script src="~/js/dropdown-menu.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

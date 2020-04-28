@@ -61,17 +61,129 @@ html {
 }
 
 body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  overflow-y: hidden;
 }
 
-.wrap-normal {
-    white-space: normal;
+.navbar-collapse.collapse {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.subscribe {
+    background-color: #f2f2f2;
 }
 
 .footer {
     position: absolute;
     bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    min-height: 400px; /* Vertically center the text there */
+    background-color: #1b1f23;
+}
+
+li {
+    list-style-type: none;
+}
+
+
+.navbar-nav {
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+    margin-bottom: -4px;
+    text-align: left;
+    float: none;
+}
+/*basic*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+ul {
+    margin: 0;
+}
+a:hover {
+    text-decoration: none;
+}
+/*header*/
+.caret-down {
+    margin-left: 2px;
+    color: #343a40;
+}
+.basket {
+    display: flex;
+    padding-top: 5px;
+}
+#basket-sum {
+    margin-left: 15px;
+    line-height: 30px;
+}
+.basket-icon {
+    color: #1b1f23;
+    position: relative;
+}
+#basket-count {
+    position: absolute;
+    text-align: center;
+    color: #fff;
+    z-index: 1;
+    top: -3px;
+    right: -7px;
+    background-color: #ffb5a0;
+    border-radius: 100%;
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+}
+.smallDevice-header {
+    display: none;
+}
+.nav-menu ul li a {
+    padding-right: 15px;
+}
+.bigDevice-header, .smallDevice-header {
+    background-color: rgba(242,242,242,0.9);
+    height: 60px;
+}
+.nav-brand {
+    color: #1b1f23;
+}
+.bigDevice-header {
+    padding-top: 10px;
+}
+@media only screen and (max-width : 570px) {
+    .smallDevice-header {
+        display: block;
+    }
+
+    .bigDevice-header {
+        display: none;
+    }
+
+    .navbar-collapse {
+        background-color: rgba(242,242,242,0.9);
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+
+}
+
+.nav-brand, .navbar-brand {
+    font-size: 25px;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
+
+
+.footer {
     width: 100%;
     white-space: nowrap;
     min-height: 400px; /* Vertically center the text there */
@@ -123,6 +235,7 @@ input[type="email"] {
         color: #000000;
         border: 1px solid #000000
     }
+
 input[type="submit"] {
     border: 1px solid #cccccc;
     height: 41px;
@@ -132,10 +245,16 @@ input[type="submit"] {
     padding-right: 15px;
 }
 
-.pt-30px{
+
+.pt-30px {
     padding-top: 30px;
 }
 
-.pl-40px{
+.pl-40px {
     padding-left: 40px;
 }
+
+.wrap-normal {
+    white-space: normal;
+}
+
