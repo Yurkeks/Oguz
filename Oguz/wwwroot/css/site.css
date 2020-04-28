@@ -2,60 +2,62 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+    color: #0366d6;
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -64,10 +66,29 @@ body {
   overflow-y: hidden;
 }
 
-
 .navbar-collapse.collapse {
     text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
+
+.subscribe {
+    background-color: #f2f2f2;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    min-height: 400px; /* Vertically center the text there */
+    background-color: #1b1f23;
+}
+
+li {
+    list-style-type: none;
+}
+
 
 .navbar-nav {
     margin: 0 auto;
@@ -224,6 +245,7 @@ input[type="submit"] {
     padding-right: 15px;
 }
 
+
 .pt-30px {
     padding-top: 30px;
 }
@@ -235,3 +257,4 @@ input[type="submit"] {
 .wrap-normal {
     white-space: normal;
 }
+
