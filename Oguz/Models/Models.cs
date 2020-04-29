@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Oguz.Models
 {
@@ -21,15 +19,36 @@ namespace Oguz.Models
     {
         public string Price { get; set; }
         public string DateTime { get; set; }
-        public string Color { get; set; }
-        public List<Size> Sizes { get; set; }
 
         public Guid CustomerId { get; set; }
         public Customer Customer { get; set; }
+        public Guid ProductId { get; set; }
+        public Product Material { get; set; }
+    }
 
+    public class Product : BaseDbObject
+    {
+        public List<Size> Sizes { get; set; }
+        public Guid StyleId { get; set; }
+        public Style Style { get; set; }
+        public Guid ColorId { get; set; }
+        public Color Color { get; set; }
         public Guid MaterialId { get; set; }
         public Material Material { get; set; }
+    }
 
+    public class Style : BaseDbObject
+    {
+        public string ImagePath { get; set; }
+        public Category Category { get; set; }
+    }
+
+    public enum Category
+    {
+        Шторы,
+        Гардины,
+        Подушки,
+        Аксессуары
     }
 
     public class Size
@@ -52,29 +71,22 @@ namespace Oguz.Models
     {
         public int Cost { get; set; }
         public string Description { get; set; }
-        public string Photo { get; set; }
+        public string ImagePath { get; set; }
         public string FabricStructure { get; set; }
         public string CareInstructions { get; set; }
 
         public List<Color> Colors { get; set; } 
-
-        public Guid CategoryId { get; set; }
         public Category Category { get; set; }
-
         public Guid BrandId { get; set; }
         public Brand Brand { get; set; } 
     }
 
     public class Color : BaseDbObject
     {
-        public string Photo { get; set; }
+        public string ImagePath { get; set; }
     }
 
     public class Brand : BaseDbObject
-    {
-    }
-
-    public class Category : BaseDbObject
     {
     }
 

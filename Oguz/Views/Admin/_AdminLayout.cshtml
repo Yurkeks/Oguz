@@ -16,29 +16,38 @@
     <header>
         <div class="bigDevice-header ">
             <div class="container d-flex justify-content-between align-items-center">
-                <a class="nav-brand" asp-area="" asp-controller="Home" asp-action="Index">Oguz</a>
+                <a class="nav-brand" asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a>
                 <div class="nav-menu">
                     <ul class="d-flex">
                         <li class="nav-item">
-                            <a class=" text-dark" asp-area="" asp-controller="Home" asp-action="Index">Образцы</a>
+                            <a class=" text-dark" asp-area="" asp-action="Orders">Заказы</a>
                         </li>
                         <li class="dropdown">
                             <a class=" text-dark" href="#">
-                                Купить
+                                 Данные
                                 <span class="caret-down"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
                             </a>
                             <div class="dropdown-menu" style="display: none">
+                                <a class="dropdown-item" href="#">Образцы</a>
+                                <a class="dropdown-item" asp-controller="Styles" asp-action="Index">Стили</a>
                                 <a class="dropdown-item" href="#">Шторы</a>
                                 <a class="dropdown-item" href="#">Гардины</a>
                                 <a class="dropdown-item" href="#">Подушки</a>
                                 <a class="dropdown-item" href="#">Акссесуары</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="Brands" asp-action="Index">Бренды</a>
+
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Скидки</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Контакты</a>
+                        <li class="dropdown">
+                            <a class=" text-dark" href="#">
+                                 Настройки
+                                <span class="caret-down"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                            </a>
+                            <div class="dropdown-menu" style="display: none">
+                                <a class="dropdown-item" href="#">Почта</a>
+                                <a class="dropdown-item" href="#">Роли</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -54,7 +63,7 @@
         <div class="smallDevice-header">
             <nav class="navbar navbar-expand-sm navbar-toggleable-lg navbar-light mb-3 border-bottom box-shadow">
                 <div class="container">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Oguz</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a>
                     <div class="basket">
                         <a href="/" class="basket-icon">
                             <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
@@ -73,20 +82,25 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                    Купить
+                                    Данные
                                 </a>
                                 <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Образцы</a>
                                     <a class="dropdown-item" href="#">Шторы</a>
                                     <a class="dropdown-item" href="#">Гардины</a>
                                     <a class="dropdown-item" href="#">Подушки</a>
                                     <a class="dropdown-item" href="#">Акссесуары</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Скидки</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Контакты</a>
+                            <li class="dropdown">
+                                <a class=" text-dark" href="#">
+                                    Настройки
+                                    <span class="caret-down"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                </a>
+                                <div class="dropdown-menu" style="display: none">
+                                    <a class="dropdown-item" href="#">Почта</a>
+                                    <a class="dropdown-item" href="#">Роли</a>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -103,11 +117,7 @@
     <footer class="footer text-muted">
         <div class="subscribe">
             <div class="container text-center">
-                <h2>Подпишись</h2>
-                <div class="wrap-normal">Просто введи email чтобы получать уведомления о новых коллекциях и распродажах</div>
-                <br />
-                <input id="Subscribe" type="email" class="contact_email" name="contact[email]" required="" placeholder="Enter your email address...">
-                <input id="SubscribeButton" type="submit" class="action_button sign_up btn" value="ОК">
+                <a asp-controller="Home" asp-action="Index"><h3>Вернуться на сайт</h3></a>
             </div>
         </div>
         <div class="container pt-4">
@@ -149,7 +159,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/preloader.js"></script>
-    <script src="~/js/Subscribe.js"></script>
     <script src="~/js/dropdown-menu.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
