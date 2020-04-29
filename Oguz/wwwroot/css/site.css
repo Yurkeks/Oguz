@@ -258,3 +258,7 @@ input[type="submit"] {
     white-space: normal;
 }
 
+.CRUD-container {
+    padding-top:60px;
+    padding-bottom:60px;
+}

@@ -34,5 +34,24 @@ namespace Oguz.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public void Subscribe(string email)
+        {
+            if (_context.Customers.Any(a => a.Email == email))
+            {
+                var customer = _context.Customers.FirstOrDefault(e => e.Email == email);
+                customer.IsSubscribe = true;
+                _context.SaveChanges();
+            }
+            else
+            {
+                Customer customer = new Customer();
+                customer.Id = Guid.NewGuid();
+                customer.Email = email;
+                customer.IsSubscribe = true;
+                _context.Add(customer);
+                _context.SaveChanges();
+            }
+        }
     }
 }
