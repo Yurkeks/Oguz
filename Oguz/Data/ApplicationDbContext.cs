@@ -15,7 +15,6 @@ namespace Oguz.Data
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Style> Styles { get; set; }
         public DbSet<Material> Materials { get; set; }
-        public DbSet<Product> Products { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Customer> Customers { get; set; }

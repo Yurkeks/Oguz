@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Oguz.Migrations
 {
-    public partial class BaseModels : Migration
+    public partial class NewModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -95,6 +95,7 @@ namespace Oguz.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
+                    ImagePath = table.Column<string>(nullable: true),
                     Category = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -219,6 +220,7 @@ namespace Oguz.Migrations
                     ImagePath = table.Column<string>(nullable: true),
                     FabricStructure = table.Column<string>(nullable: true),
                     CareInstructions = table.Column<string>(nullable: true),
+                    SizeId = table.Column<Guid>(nullable: false),
                     Category = table.Column<int>(nullable: false),
                     BrandId = table.Column<Guid>(nullable: false)
                 },
@@ -240,7 +242,7 @@ namespace Oguz.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     ImagePath = table.Column<string>(nullable: true),
-                    MaterialId = table.Column<Guid>(nullable: true)
+                    MaterialId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -249,39 +251,6 @@ namespace Oguz.Migrations
                         name: "FK_Colors_Materials_MaterialId",
                         column: x => x.MaterialId,
                         principalTable: "Materials",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    StyleId = table.Column<Guid>(nullable: false),
-                    ColorId = table.Column<Guid>(nullable: false),
-                    MaterialId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Products_Colors_ColorId",
-                        column: x => x.ColorId,
-                        principalTable: "Colors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Materials_MaterialId",
-                        column: x => x.MaterialId,
-                        principalTable: "Materials",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Styles_StyleId",
-                        column: x => x.StyleId,
-                        principalTable: "Styles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -295,11 +264,19 @@ namespace Oguz.Migrations
                     Price = table.Column<string>(nullable: true),
                     DateTime = table.Column<string>(nullable: true),
                     CustomerId = table.Column<Guid>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: false)
+                    StyleId = table.Column<Guid>(nullable: false),
+                    ColorId = table.Column<Guid>(nullable: false),
+                    MaterialId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Colors_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
@@ -307,9 +284,15 @@ namespace Oguz.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Orders_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Orders_Materials_MaterialId",
+                        column: x => x.MaterialId,
+                        principalTable: "Materials",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Orders_Styles_StyleId",
+                        column: x => x.StyleId,
+                        principalTable: "Styles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -321,17 +304,17 @@ namespace Oguz.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Width = table.Column<int>(nullable: false),
                     Height = table.Column<int>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: true)
+                    OrderId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sizes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sizes_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
+                        name: "FK_Sizes_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -384,38 +367,54 @@ namespace Oguz.Migrations
                 column: "BrandId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Materials_SizeId",
+                table: "Materials",
+                column: "SizeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_ColorId",
+                table: "Orders",
+                column: "ColorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerId",
                 table: "Orders",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_ProductId",
+                name: "IX_Orders_MaterialId",
                 table: "Orders",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_ColorId",
-                table: "Products",
-                column: "ColorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Products_MaterialId",
-                table: "Products",
                 column: "MaterialId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_StyleId",
-                table: "Products",
+                name: "IX_Orders_StyleId",
+                table: "Orders",
                 column: "StyleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sizes_ProductId",
+                name: "IX_Sizes_OrderId",
                 table: "Sizes",
-                column: "ProductId");
+                column: "OrderId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Materials_Sizes_SizeId",
+                table: "Materials",
+                column: "SizeId",
+                principalTable: "Sizes",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_Colors_Materials_MaterialId",
+                table: "Colors");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Orders_Materials_MaterialId",
+                table: "Orders");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -432,12 +431,6 @@ namespace Oguz.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "Sizes");
-
-            migrationBuilder.DropTable(
                 name: "SMTPClients");
 
             migrationBuilder.DropTable(
@@ -447,22 +440,25 @@ namespace Oguz.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Materials");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Brands");
+
+            migrationBuilder.DropTable(
+                name: "Sizes");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Colors");
 
             migrationBuilder.DropTable(
+                name: "Customers");
+
+            migrationBuilder.DropTable(
                 name: "Styles");
-
-            migrationBuilder.DropTable(
-                name: "Materials");
-
-            migrationBuilder.DropTable(
-                name: "Brands");
         }
     }
 }

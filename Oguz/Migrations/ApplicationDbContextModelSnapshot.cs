@@ -242,7 +242,7 @@ namespace Oguz.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("MaterialId")
+                    b.Property<Guid>("MaterialId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -308,9 +308,14 @@ namespace Oguz.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("SizeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
+
+                    b.HasIndex("SizeId");
 
                     b.ToTable("Materials");
                 });
@@ -321,43 +326,22 @@ namespace Oguz.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ColorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DateTime")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Price")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("Oguz.Models.Product", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ColorId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("MaterialId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("StyleId")
@@ -367,11 +351,13 @@ namespace Oguz.Migrations
 
                     b.HasIndex("ColorId");
 
+                    b.HasIndex("CustomerId");
+
                     b.HasIndex("MaterialId");
 
                     b.HasIndex("StyleId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Oguz.Models.SMTPClient", b =>
@@ -409,7 +395,7 @@ namespace Oguz.Migrations
                     b.Property<int>("Height")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ProductId")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Width")
@@ -417,7 +403,7 @@ namespace Oguz.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Sizes");
                 });
@@ -495,9 +481,11 @@ namespace Oguz.Migrations
 
             modelBuilder.Entity("Oguz.Models.Color", b =>
                 {
-                    b.HasOne("Oguz.Models.Material", null)
+                    b.HasOne("Oguz.Models.Material", "Material")
                         .WithMany("Colors")
-                        .HasForeignKey("MaterialId");
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Oguz.Models.Material", b =>
@@ -507,28 +495,25 @@ namespace Oguz.Migrations
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Oguz.Models.Size", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Oguz.Models.Order", b =>
                 {
-                    b.HasOne("Oguz.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Oguz.Models.Product", "Material")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Oguz.Models.Product", b =>
-                {
                     b.HasOne("Oguz.Models.Color", "Color")
                         .WithMany()
                         .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Oguz.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -547,9 +532,11 @@ namespace Oguz.Migrations
 
             modelBuilder.Entity("Oguz.Models.Size", b =>
                 {
-                    b.HasOne("Oguz.Models.Product", null)
+                    b.HasOne("Oguz.Models.Order", "Order")
                         .WithMany("Sizes")
-                        .HasForeignKey("ProductId");
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
