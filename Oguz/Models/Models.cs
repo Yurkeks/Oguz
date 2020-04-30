@@ -20,15 +20,9 @@ namespace Oguz.Models
         public string Price { get; set; }
         public string DateTime { get; set; }
 
+        public List<Size> Sizes { get; set; }
         public Guid CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public Guid ProductId { get; set; }
-        public Product Material { get; set; }
-    }
-
-    public class Product : BaseDbObject
-    {
-        public List<Size> Sizes { get; set; }
         public Guid StyleId { get; set; }
         public Style Style { get; set; }
         public Guid ColorId { get; set; }
@@ -58,13 +52,9 @@ namespace Oguz.Models
         public Guid Id { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-    }
 
-    public class Customer : BaseDbObject 
-    {
-        public string Email { get; set; }
-        public int Amount { get; set; }
-        public bool IsSubscribe { get; set; }
+        public Guid OrderId { get; set; }
+        public Order Order { get; set; }
     }
 
     public class Material : BaseDbObject
@@ -75,6 +65,8 @@ namespace Oguz.Models
         public string FabricStructure { get; set; }
         public string CareInstructions { get; set; }
 
+        public Guid SizeId { get; set; }
+        public Size Size { get; set; }
         public List<Color> Colors { get; set; } 
         public Category Category { get; set; }
         public Guid BrandId { get; set; }
@@ -84,10 +76,20 @@ namespace Oguz.Models
     public class Color : BaseDbObject
     {
         public string ImagePath { get; set; }
+
+        public Guid MaterialId { get; set; }
+        public Material Material { get; set; }
     }
 
     public class Brand : BaseDbObject
     {
+    }
+
+    public class Customer : BaseDbObject
+    {
+        public string Email { get; set; }
+        public int Amount { get; set; }
+        public bool IsSubscribe { get; set; }
     }
 
     public class SMTPClient : BaseDbObject
