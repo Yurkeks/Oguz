@@ -1,46 +1,67 @@
-﻿@model IEnumerable<Oguz.Models.Color>
+@model Oguz.Models.Material
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
 }
 
 <div class="CRUD-container">
-    <div style="padding-left:15px">
-        <a class="btn btn-light mb-1" role="button" href="@ViewBag.BackUrl" style="margin-top:-40px"><-- @ViewBag.Category</a>
-        <h1>Цвета</h1>
-        <a class="btn btn-primary mt-4 mb-1" role="button" asp-action="Create" asp-route-materialId="@Model.FirstOrDefault().MaterialId">Добавить цвет</a>
-    </div>
-    <div class="col-5 pt-4 color-icon">
-        <table class="table table-striped">
-            <thead class="thead-dark">
-                <tr>
-                    <th>
-                        Название
-                    </th>
-                    <th>
-                        Фото
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            <img src='~/Images/Colors/@item.ImageName' />
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <h1>Добавление ткани</h1>
+    <div><a class="btn btn-backtolist mt-4 mb-1" role="button" asp-action="Index">Назад к списку</a></div>
+    <hr />
+    <div class="row">
+        <div class="col-md-5">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <label class="col-4">Категория: </label>
+                    <select asp-for="Category" class="form-control col-8">
+                        <option value="@Category.Шторы">@Category.Шторы</option>
+                        <option value="@Category.Гардины">@Category.Гардины</option>
+                    </select>
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Бренд: </label>
+                    @Html.DropDownListFor(model => model.BrandId, ViewBag.Brands as SelectList, new { @class = "form-control col-8" })
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Название: </label>
+                    <input asp-for="Name" class="form-control col-8" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Описание: </label>
+                    @Html.TextAreaFor(m => m.Description, new { @class = "col-8 form-control" })
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Стркуктура ткани: </label>
+                    <input asp-for="FabricStructure" class="form-control col-8" />
+                    <span asp-validation-for="FabricStructure" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Инструкция по уходу: </label>
+                    <input asp-for="CareInstructions" class="form-control col-8" />
+                    <span asp-validation-for="CareInstructions" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Стоимость: </label>
+                    <input type="number" asp-for="Cost" class="form-control col-8" required />
+                    <span asp-validation-for="Cost" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Показывать на сайте?</label>
+                    <input type="checkbox" asp-for="Active" class="form-control col-8" />
+                    <span asp-validation-for="Active" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Фото: </label>
+                    <input type="file" class="col-8" name="image" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Добавить" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
