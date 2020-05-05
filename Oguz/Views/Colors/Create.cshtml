@@ -1,0 +1,34 @@
+﻿@model Oguz.Models.Color
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+
+<div class="CRUD-container">
+    <h1>Добавление Цвета</h1>
+    <div><a class="btn btn-backtolist mt-4 mb-1" role="button" asp-action="Index">Назад к списку</a></div>
+    <hr />
+    <div class="row">
+        <div class="col-md-5">
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Название: </label>
+                    <input asp-for="Name" class="form-control col-8" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Фото: </label>
+                    <input type="file" class="col-8" style="margin-left:-15px" name="image" />
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="MaterialId" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Добавить" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

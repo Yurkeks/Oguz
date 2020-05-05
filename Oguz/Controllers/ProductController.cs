@@ -10,69 +10,69 @@ namespace Oguz.Controllers
 {
     public class ProductController : Controller
     {
-        private ApplicationDbContext db;
-        public ProductController(ApplicationDbContext db)
-        {
-            this.db = db;
-        }
-        public IActionResult Index()
-        {
-            return RedirectToAction("Style");
-        }
-        public IActionResult Style(Category category)
-        {
-            Style style = default;
-            if (!category.Equals(default))
-            {
-                style = db.Styles.Where(s => s.Category == category).FirstOrDefault();
-            }
-            return View(style);
-        }
-        [HttpPost]
-        public IActionResult Style(Guid styleId)
-        {
-            var product = db.Products.Where(x => x.StyleId == styleId).First(); 
-            if (product.Equals(null))
-            {
-                return View("Error"); // TODO: create error view or something else 
-            }
-            return RedirectToAction("Fabric", product);
-        }
-        public IActionResult Fabric(Product product)
-        {
-            var order = new Order();
-            ViewBag.Materials = db.Materials.Where(m => m.Category == product.Style.Category).ToList();
-            return View(order);
-        }
-        [HttpPost]
-        public IActionResult Fabric(Order order)
-        {
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError("", "some error");
-            }
-            return RedirectToAction("Color", order);
-        }
-        public IActionResult Color(Order order)
-        {
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError("", "some error");
-            }
-            ViewBag.Colors  = (List<Color>)db.Materials.Where(m => m.Id == order.Material.Id).Select(c => c.Colors);
-            return View(order);
-        }
-        [HttpPost]
-        public IActionResult Color(Order order, Guid colorId)
-        {
-            order.Material.ColorId = colorId;
-            return RedirectToAction("Size", order);
-        }
-        public IActionResult Size()
-        {
+        //private ApplicationDbContext db;
+        //public ProductController(ApplicationDbContext db)
+        //{
+        //    this.db = db;
+        //}
+        //public IActionResult Index()
+        //{
+        //    return RedirectToAction("Style");
+        //}
+        //public IActionResult Style(Category category)
+        //{
+        //    Style style = default;
+        //    if (!category.Equals(default))
+        //    {
+        //        style = db.Styles.Where(s => s.Category == category).FirstOrDefault();
+        //    }
+        //    return View(style);
+        //}
+        //[HttpPost]
+        //public IActionResult Style(Guid styleId)
+        //{
+        //    var product = db.Products.Where(x => x.StyleId == styleId).First(); 
+        //    if (product.Equals(null))
+        //    {
+        //        return View("Error"); // TODO: create error view or something else 
+        //    }
+        //    return RedirectToAction("Fabric", product);
+        //}
+        //public IActionResult Fabric(Product product)
+        //{
+        //    var order = new Order();
+        //    ViewBag.Materials = db.Materials.Where(m => m.Category == product.Style.Category).ToList();
+        //    return View(order);
+        //}
+        //[HttpPost]
+        //public IActionResult Fabric(Order order)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        ModelState.AddModelError("", "some error");
+        //    }
+        //    return RedirectToAction("Color", order);
+        //}
+        //public IActionResult Color(Order order)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        ModelState.AddModelError("", "some error");
+        //    }
+        //    ViewBag.Colors  = (List<Color>)db.Materials.Where(m => m.Id == order.Material.Id).Select(c => c.Colors);
+        //    return View(order);
+        //}
+        //[HttpPost]
+        //public IActionResult Color(Order order, Guid colorId)
+        //{
+        //    order.Material.ColorId = colorId;
+        //    return RedirectToAction("Size", order);
+        //}
+        //public IActionResult Size()
+        //{
 
-            return View();
-        }
+        //    return View();
+        //}
         /*
          *  private ApplicationDbContext db;
         public CurtainsController(ApplicationDbContext db)

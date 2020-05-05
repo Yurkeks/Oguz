@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Oguz.Models.Material>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+<div class="CRUD-container">
+    <div style="padding-left:15px">
+        <h1>Подушки</h1>
+        <div><a class="btn btn-primary mt-4 mb-1" role="button" asp-action="Create">Добавить</a></div>
+    </div>
+    <div class="col pt-4">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Категория
+                    </th>
+                    <th>
+                        Бренд
+                    </th>
+                    <th>
+                        Стоимость
+                    </th>
+                    <th>
+                        Цвета
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Brand.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cost)
+                        </td>
+                        <td>
+                            @item.Colors.Count |<a asp-controller="Colors" asp-action="Index" asp-route-id="@item.Id"> Редактировать</a>
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

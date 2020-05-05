@@ -33,7 +33,7 @@ namespace Oguz.Models
 
     public class Style : BaseDbObject
     {
-        public string ImagePath { get; set; }
+        public string ImageName { get; set; }
         public Category Category { get; set; }
     }
 
@@ -60,25 +60,24 @@ namespace Oguz.Models
     public class Material : BaseDbObject
     {
         public int Cost { get; set; }
+        public bool Active { get; set; }
         public string Description { get; set; }
-        public string ImagePath { get; set; }
+        public string ImageName { get; set; }
         public string FabricStructure { get; set; }
         public string CareInstructions { get; set; }
 
         public Guid SizeId { get; set; }
         public Size Size { get; set; }
-        public List<Color> Colors { get; set; } 
+        public List<Color> Colors { get; set; }
         public Category Category { get; set; }
         public Guid BrandId { get; set; }
-        public Brand Brand { get; set; } 
+        public Brand Brand { get; set; }
     }
 
     public class Color : BaseDbObject
     {
-        public string ImagePath { get; set; }
-
+        public string ImageName { get; set; }
         public Guid MaterialId { get; set; }
-        public Material Material { get; set; }
     }
 
     public class Brand : BaseDbObject
