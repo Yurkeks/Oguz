@@ -261,6 +261,10 @@ input[type="submit"] {
     padding-top:60px;
     padding-bottom:60px;
 }
+.CRUD-container img {
+    max-width: 600px;
+    max-height: 500px;
+}
 /*choose style page*/
 .product_description {
     text-align: center;

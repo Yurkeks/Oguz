@@ -15,6 +15,8 @@ namespace Oguz.Areas
                 fileName = Guid.NewGuid().ToString() + file.FileName;
                 filePath = string.Concat(pathToSave, fileName);
             }
+            if (!Directory.Exists(pathToSave))
+                Directory.CreateDirectory(pathToSave);
             using (FileStream fileStream = new FileStream(filePath, FileMode.Create))
             {
                 file.CopyTo(fileStream);

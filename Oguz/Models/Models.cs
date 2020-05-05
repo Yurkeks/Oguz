@@ -23,9 +23,9 @@ namespace Oguz.Models
         public List<Size> Sizes { get; set; }
         public Guid CustomerId { get; set; }
         public Customer Customer { get; set; }
-        public Guid StyleId { get; set; }
+        public Guid? StyleId { get; set; }
         public Style Style { get; set; }
-        public Guid ColorId { get; set; }
+        public Guid? ColorId { get; set; }
         public Color Color { get; set; }
         public Guid MaterialId { get; set; }
         public Material Material { get; set; }
@@ -53,7 +53,7 @@ namespace Oguz.Models
         public int Width { get; set; }
         public int Height { get; set; }
 
-        public Guid OrderId { get; set; }
+        public Guid? OrderId { get; set; }
         public Order Order { get; set; }
     }
 
@@ -66,7 +66,7 @@ namespace Oguz.Models
         public string FabricStructure { get; set; }
         public string CareInstructions { get; set; }
 
-        public Guid SizeId { get; set; }
+        public Guid? SizeId { get; set; }
         public Size Size { get; set; }
         public List<Color> Colors { get; set; }
         public Category Category { get; set; }
