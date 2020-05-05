@@ -10,8 +10,8 @@ using Oguz.Data;
 namespace Oguz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200430103800_NewModels")]
-    partial class NewModels
+    [Migration("20200504110549_Base")]
+    partial class Base
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -285,6 +285,9 @@ namespace Oguz.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("BrandId")
                         .HasColumnType("uniqueidentifier");

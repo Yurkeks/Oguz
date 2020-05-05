@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Oguz.Migrations
 {
-    public partial class NewModels : Migration
+    public partial class Base : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -65,8 +65,8 @@ namespace Oguz.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    Amount = table.Column<int>(nullable: false),
-                    IsSubscribe = table.Column<bool>(nullable: false)
+                    Amount = table.Column<int>(nullable: true),
+                    IsSubscribe = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -95,7 +95,7 @@ namespace Oguz.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    ImagePath = table.Column<string>(nullable: true),
+                    ImageName= table.Column<string>(nullable: true),
                     Category = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -216,13 +216,14 @@ namespace Oguz.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Cost = table.Column<int>(nullable: false),
+                    Active = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(nullable: true),
-                    ImagePath = table.Column<string>(nullable: true),
+                    ImageName = table.Column<string>(nullable: true),
                     FabricStructure = table.Column<string>(nullable: true),
                     CareInstructions = table.Column<string>(nullable: true),
-                    SizeId = table.Column<Guid>(nullable: false),
+                    SizeId = table.Column<Guid>(nullable: true),
                     Category = table.Column<int>(nullable: false),
-                    BrandId = table.Column<Guid>(nullable: false)
+                    BrandId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -232,7 +233,7 @@ namespace Oguz.Migrations
                         column: x => x.BrandId,
                         principalTable: "Brands",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -241,8 +242,8 @@ namespace Oguz.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    ImagePath = table.Column<string>(nullable: true),
-                    MaterialId = table.Column<Guid>(nullable: false)
+                    ImageName = table.Column<string>(nullable: true),
+                    MaterialId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -252,7 +253,7 @@ namespace Oguz.Migrations
                         column: x => x.MaterialId,
                         principalTable: "Materials",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -263,9 +264,9 @@ namespace Oguz.Migrations
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<string>(nullable: true),
                     DateTime = table.Column<string>(nullable: true),
-                    CustomerId = table.Column<Guid>(nullable: false),
-                    StyleId = table.Column<Guid>(nullable: false),
-                    ColorId = table.Column<Guid>(nullable: false),
+                    CustomerId = table.Column<Guid>(nullable: true),
+                    StyleId = table.Column<Guid>(nullable: true),
+                    ColorId = table.Column<Guid>(nullable: true),
                     MaterialId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
@@ -276,25 +277,25 @@ namespace Oguz.Migrations
                         column: x => x.ColorId,
                         principalTable: "Colors",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Orders_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Orders_Materials_MaterialId",
                         column: x => x.MaterialId,
                         principalTable: "Materials",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Orders_Styles_StyleId",
                         column: x => x.StyleId,
                         principalTable: "Styles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -304,7 +305,7 @@ namespace Oguz.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Width = table.Column<int>(nullable: false),
                     Height = table.Column<int>(nullable: false),
-                    OrderId = table.Column<Guid>(nullable: false)
+                    OrderId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -402,7 +403,7 @@ namespace Oguz.Migrations
                 column: "SizeId",
                 principalTable: "Sizes",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+                onDelete: ReferentialAction.NoAction);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
