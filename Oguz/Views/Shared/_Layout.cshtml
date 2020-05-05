@@ -28,7 +28,7 @@
                                 <span class="caret-down"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
                             </a>
                             <div class="dropdown-menu" style="display: none">
-                                <a class="dropdown-item" href="#">Шторы</a>
+                                <a class="dropdown-item" href="~/product/style">Шторы</a>
                                 <a class="dropdown-item" href="#">Гардины</a>
                                 <a class="dropdown-item" href="#">Подушки</a>
                                 <a class="dropdown-item" href="#">Акссесуары</a>
@@ -94,11 +94,9 @@
             </nav>
         </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 pt-3">
             @RenderBody()
         </main>
-    </div>
 
     <footer class="footer text-muted">
         <div class="subscribe">
@@ -152,6 +150,7 @@
     <script src="~/js/Subscribe.js"></script>
     <script src="~/js/dropdown-menu.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/orderProgressBar.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
