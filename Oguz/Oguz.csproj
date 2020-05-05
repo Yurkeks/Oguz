@@ -23,6 +23,9 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+    <Folder Include="wwwroot\Images\Curtains\" />
+    <Folder Include="wwwroot\Images\Other\" />
+    <Folder Include="wwwroot\Images\Pillows\" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Oguz.Data;
 using Oguz.Models;
@@ -22,6 +23,12 @@ namespace Oguz.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Swatches()
+        {
+            var materials = _context.Materials.Include(c => c.Colors).Include(c => c.Brand).Where(m => m.Category == Category.Шторы || m.Category == Category.Гардины).ToList();
+            return View(materials);
         }
 
         public IActionResult Privacy()
