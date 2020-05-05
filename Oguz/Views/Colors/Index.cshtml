@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Oguz.Models.Color>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="CRUD-container">
+    <div style="padding-left:15px">
+        <a class="btn btn-light mb-1" role="button" href="@ViewBag.BackUrl" style="margin-top:-40px"><-- @ViewBag.Category</a>
+        <h1>Цвета</h1>
+        <a class="btn btn-primary mt-4 mb-1" role="button" asp-action="Create" asp-route-materialId="@Model.FirstOrDefault().MaterialId">Добавить цвет</a>
+    </div>
+    <div class="col-5 pt-4 color-icon">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Фото
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            <img src='~/Images/Colors/@item.ImageName' />
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
