@@ -19,6 +19,7 @@ namespace Oguz.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<SMTPClient> SMTPClients { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
