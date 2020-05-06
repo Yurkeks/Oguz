@@ -27,7 +27,7 @@ namespace Oguz.Controllers
         // GET
         public IActionResult Index()
         {
-            var materials = _context.Materials.Where(p => p.Category == Category.Шторы || p.Category == Category.Гардины).Include(m => m.Brand).Include(c => c.Colors).ToList();
+            var materials = _context.Materials.Where(p => p.Category == Category.Curtains || p.Category == Category.Shades).Include(m => m.Brand).Include(c => c.Colors).ToList();
             if (materials == null || materials.Count == 0)
                 return RedirectToAction(nameof(Create));
             return View(materials);

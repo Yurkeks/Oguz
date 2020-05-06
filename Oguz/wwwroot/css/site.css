@@ -56,15 +56,18 @@ button.accept-policy {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-    position: relative;
-    min-height: 100%;
+    //position: relative;
+    height: 100%;
 }
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
+    /*margin-bottom: 60px;
     font-family: 'SofiaProRegular' !important;
-    overflow-y: hidden;
+    overflow-y: hidden;*/
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr auto;
 }
 
 .navbar-collapse.collapse {
@@ -75,6 +78,22 @@ body {
 
 .subscribe {
     background-color: #f2f2f2;
+}
+
+/*.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    min-height: 400px; /* Vertically center the text there */
+background-color: #1b1f23;
+}
+
+*/.footer {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    min-height: 400px; /* Vertically center the text there */
+    background-color: #1b1f23;
 }
 
 .footer {
@@ -181,13 +200,6 @@ a:hover {
     letter-spacing: -1px;
 }
 
-
-.footer {
-    width: 100%;
-    white-space: nowrap;
-    min-height: 400px; /* Vertically center the text there */
-    background-color: #1b1f23;
-}
 
 .subscribe {
     background-color: #f2f2f2;

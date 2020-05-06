@@ -39,10 +39,10 @@ namespace Oguz.Models
 
     public enum Category
     {
-        Шторы,
-        Гардины,
-        Подушки,
-        Аксессуары
+        Curtains,
+        Shades,
+        Pillows,
+        Accessories
     }
 
     public class Size
