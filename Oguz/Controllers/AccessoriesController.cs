@@ -27,7 +27,7 @@ namespace Oguz.Controllers
         // GET
         public IActionResult Index()
         {
-            var materials = _context.Materials.Where(p => p.Category == Category.Аксессуары).Include(m => m.Brand).Include(c => c.Colors).ToList();
+            var materials = _context.Materials.Where(p => p.Category == Category.Accessories).Include(m => m.Brand).Include(c => c.Colors).ToList();
             if (materials == null || materials.Count == 0)
                 return RedirectToAction(nameof(Create));
             return View(materials);
@@ -53,7 +53,7 @@ namespace Oguz.Controllers
             if (ModelState.IsValid)
             {
                 material.Id = Guid.NewGuid();
-                material.Category = Category.Аксессуары;
+                material.Category = Category.Accessories;
                 Size size = new Size
                 {
                     Id = Guid.NewGuid(),
@@ -104,7 +104,7 @@ namespace Oguz.Controllers
                 material.ImageName = path.ToString();
             }
 
-            material.Category = Category.Аксессуары;
+            material.Category = Category.Accessories;
             if (ModelState.IsValid)
             {
                 try

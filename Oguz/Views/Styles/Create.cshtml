@@ -14,10 +14,10 @@
             <div class="form-group">
                 <label>Категория</label>
                 <select asp-for="Category" class="form-control">
-                    <option value="@Category.Аксессуары"></option>
-                    <option value="@Category.Гардины"></option>
-                    <option value="@Category.Подушки"></option>
-                    <option value="@Category.Шторы"></option>
+                    <option value="@Category.Curtains">Шторы</option>
+                    <option value="@Category.Shades">Гардины</option>
+                    <option value="@Category.Pillows">Подушки</option>
+                    <option value="@Category.Accessories">Аксессуары</option>
                 </select>
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>

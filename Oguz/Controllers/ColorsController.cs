@@ -33,13 +33,13 @@ namespace Oguz.Controllers
                 return RedirectToAction("Create", "Colors", new { materialId = id });
 
             var category = _context.Materials.Find(id).Category;
-            if (category == Category.Аксессуары)
+            if (category == Category.Accessories)
                 ViewBag.BackUrl = "/Accessories/";
-            if (category == Category.Гардины)
+            if (category == Category.Shades)
                 ViewBag.BackUrl = "/Curtains/";
-            if (category == Category.Подушки)
+            if (category == Category.Pillows)
                 ViewBag.BackUrl = "/Pillows/";
-            if (category == Category.Шторы)
+            if (category == Category.Curtains)
                 ViewBag.BackUrl = "/Curtains/";
             ViewBag.Category = category.ToString();
             return View(colors);
