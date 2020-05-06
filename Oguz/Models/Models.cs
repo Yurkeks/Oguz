@@ -13,14 +13,16 @@ namespace Oguz.Models
         [Key]
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public bool Active { get; set; }
     }
 
     public class Order : BaseDbObject
     {
-        public string Price { get; set; }
+        public int Price { get; set; }
         public string DateTime { get; set; }
 
         public List<Size> Sizes { get; set; }
+        [Required]
         public Guid CustomerId { get; set; }
         public Customer Customer { get; set; }
         public Guid? StyleId { get; set; }
@@ -60,7 +62,6 @@ namespace Oguz.Models
     public class Material : BaseDbObject
     {
         public int Cost { get; set; }
-        public bool Active { get; set; }
         public string Description { get; set; }
         public string ImageName { get; set; }
         public string FabricStructure { get; set; }
@@ -98,5 +99,9 @@ namespace Oguz.Models
         public string Password { get; set; }
         public string Host { get; set; }
     }
-
+    public class Discount : BaseDbObject
+    {
+        public int Value { get; set; }
+        public int LinearMeters { get; set; }
+    }
 }
