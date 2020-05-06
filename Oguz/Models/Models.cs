@@ -19,6 +19,7 @@ namespace Oguz.Models
     public class Order : BaseDbObject
     {
         public int Price { get; set; }
+        public int Quantity { get; set; }
         public string DateTime { get; set; }
 
         public List<Size> Sizes { get; set; }
@@ -56,7 +57,6 @@ namespace Oguz.Models
         public int Height { get; set; }
 
         public Guid? OrderId { get; set; }
-        public Order Order { get; set; }
     }
 
     public class Material : BaseDbObject
