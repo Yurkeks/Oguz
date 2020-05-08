@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using Oguz.Data;
 using Oguz.Models;
 
@@ -44,16 +41,16 @@ namespace Oguz.Controllers
 
         public void Subscribe(string email)
         {
-            if (_context.Customers.Any(a => a.Email == email))
+            if (_context.ApplicationUsers.Any(a => a.Email == email))
             {
-                var customer = _context.Customers.FirstOrDefault(e => e.Email == email);
+                var customer = _context.ApplicationUsers.FirstOrDefault(e => e.Email == email);
                 customer.IsSubscribe = true;
                 _context.SaveChanges();
             }
             else
             {
-                Customer customer = new Customer();
-                customer.Id = Guid.NewGuid();
+                ApplicationUser customer = new ApplicationUser();
+                customer.Id = Guid.NewGuid().ToString();
                 customer.Email = email;
                 customer.IsSubscribe = true;
                 _context.Add(customer);

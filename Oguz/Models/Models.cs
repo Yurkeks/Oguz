@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Oguz.Data;
 
 namespace Oguz.Models
 {
@@ -15,17 +16,23 @@ namespace Oguz.Models
         public string Name { get; set; }
         public bool Active { get; set; }
     }
+    public class City : BaseDbObject
+    {
+        public Guid CountryId { get; set; }
+    }
+    public class Country : BaseDbObject
+    {
 
+    }
     public class Order : BaseDbObject
     {
         public int Price { get; set; }
         public int Quantity { get; set; }
         public string DateTime { get; set; }
-
         public List<Size> Sizes { get; set; }
         [Required]
-        public Guid CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public string CustomerId { get; set; }
+        public ApplicationUser Customer { get; set; }
         public Guid? StyleId { get; set; }
         public Style Style { get; set; }
         public Guid? ColorId { get; set; }
@@ -84,14 +91,6 @@ namespace Oguz.Models
     public class Brand : BaseDbObject
     {
     }
-
-    public class Customer : BaseDbObject
-    {
-        public string Email { get; set; }
-        public int Amount { get; set; }
-        public bool IsSubscribe { get; set; }
-    }
-
     public class SMTPClient : BaseDbObject
     {
         public int Port { get; set; }

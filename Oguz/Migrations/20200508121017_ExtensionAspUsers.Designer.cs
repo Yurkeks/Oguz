@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oguz.Data;
 
 namespace Oguz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200508121017_ExtensionAspUsers")]
+    partial class ExtensionAspUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,26 +244,6 @@ namespace Oguz.Migrations
                     b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("Oguz.Models.City", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid>("CountryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("City");
-                });
-
             modelBuilder.Entity("Oguz.Models.Color", b =>
                 {
                     b.Property<Guid>("Id")
@@ -285,6 +267,32 @@ namespace Oguz.Migrations
                     b.HasIndex("MaterialId");
 
                     b.ToTable("Colors");
+                });
+
+            modelBuilder.Entity("Oguz.Models.Customer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsSubscribe")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Oguz.Models.Discount", b =>
@@ -367,9 +375,8 @@ namespace Oguz.Migrations
                     b.Property<Guid?>("ColorId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DateTime")
                         .HasColumnType("nvarchar(max)");
@@ -480,25 +487,17 @@ namespace Oguz.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("CityId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsSubscribe")
-                        .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PostCode")
                         .HasColumnType("int");
-
-                    b.HasIndex("CityId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -582,7 +581,7 @@ namespace Oguz.Migrations
                         .WithMany()
                         .HasForeignKey("ColorId");
 
-                    b.HasOne("Oguz.Data.ApplicationUser", "Customer")
+                    b.HasOne("Oguz.Models.Customer", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -604,15 +603,6 @@ namespace Oguz.Migrations
                     b.HasOne("Oguz.Models.Order", null)
                         .WithMany("Sizes")
                         .HasForeignKey("OrderId");
-                });
-
-            modelBuilder.Entity("Oguz.Data.ApplicationUser", b =>
-                {
-                    b.HasOne("Oguz.Models.City", "City")
-                        .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

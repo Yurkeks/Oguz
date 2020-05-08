@@ -59,10 +59,10 @@ namespace Oguz.Controllers
         [HttpPost]
         public IActionResult Completion(string email)
         {
-            Customer customer = _context.Customers.FirstOrDefault(e => e.Email == email);
+            ApplicationUser customer = _context.ApplicationUsers.FirstOrDefault(e => e.Email == email);
             if (customer == null)
             {
-                customer = new Customer()
+                customer = new ApplicationUser()
                 {
                     Email = email
                 };
