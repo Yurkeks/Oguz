@@ -1,0 +1,15 @@
+﻿@model OrderDto 
+@{
+    ViewData["Title"] = "Fabric";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Fabric</h1>
+
+@foreach (var material in Model.Materials)
+{
+    <div>@material.Name</div>
+    var orderDto = Model;
+    orderDto.MaterialId = material.Id;
+    <a asp-action="Color" asp-route-orderDto="@orderDto"></a>
+}

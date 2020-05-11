@@ -8,11 +8,11 @@ using Oguz.Models;
 
 namespace Oguz.Controllers
 {
-    public class CurtainsOrderController : Controller
+    public class OrderCurtainsController : Controller
     {
-        private Order order = default;
+        private Order order;
         private readonly ApplicationDbContext _context;
-        public CurtainsOrderController(ApplicationDbContext context)
+        public OrderCurtainsController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -28,17 +28,24 @@ namespace Oguz.Controllers
             return View(styles);
         }
         [HttpGet]
-        public IActionResult Fabric(Guid styleId, Category category)
+        public IActionResult Fabric(Guid styleId)
         {
-            order.StyleId = styleId;
-            var materials = _context.Materials.Where(c => c.Category == category && c.Active).ToList();
-            return View(materials);
+            // TODO: validation
+            
+            var style = _context.Styles.SingleOrDefault(c => c.Id == styleId);
+            var materials = _context.Materials.Where(c => c.Category == style.Category && c.Active).ToList();
+            var orderDto = new OrderDto()
+            {
+                StyleId = styleId,
+                Materials = materials
+            };
+            return View(orderDto);
         }
-        public IActionResult Color(Guid materialId)
+        public IActionResult Color(OrderDto orderDto)
         {
-            order.MaterialId = materialId;
-            var colors = _context.Colors.Where(c => c.MaterialId == materialId && c.Active).ToList();
-            return View(colors);
+            //order.MaterialId = materialId;
+            //var colors = _context.Colors.Where(c => c.MaterialId == materialId && c.Active).ToList();
+            return View();
         }
         public IActionResult Size(Guid colorId)
         {
