@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Oguz.Areas;
 using Oguz.Data;
 using Oguz.Models;
 
@@ -13,10 +16,11 @@ namespace Oguz.Controllers
     public class StylesController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public StylesController(ApplicationDbContext context)
+        private IWebHostEnvironment _appEnvironment;
+        public StylesController(ApplicationDbContext context, IWebHostEnvironment appEnvironment)
         {
             _context = context;
+            _appEnvironment = appEnvironment;
         }
 
         // GET: Styles
@@ -54,18 +58,21 @@ namespace Oguz.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Category,Id,Name")] Style style)
+        public async Task<IActionResult> Create(Style style, IFormFile image)
         {
+            if (image != null)
+            {
+                var path = FilesHelper.UploadFile(_appEnvironment.WebRootPath + "\\Images\\Styles\\", image);
+                style.ImageName = path.ToString();
+            }
             if (ModelState.IsValid)
             {
                 style.Id = Guid.NewGuid();
                 _context.Add(style);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
-            return View(style);
+            return RedirectToAction(nameof(Index));
         }
-
         // GET: Styles/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
@@ -87,11 +94,18 @@ namespace Oguz.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Category,Id,Name")] Style style)
+        public async Task<IActionResult> Edit(Style style, IFormFile image)
         {
-            if (id != style.Id)
+            if (image != null)
             {
-                return NotFound();
+                string fileName = style.ImageName;
+                string fullPath = _appEnvironment.ApplicationName + "\\Images\\Curtains\\" + style.ImageName;
+                if (System.IO.File.Exists(fullPath))
+                {
+                    System.IO.File.Delete(fullPath);
+                }
+                var path = FilesHelper.UploadFile(_appEnvironment.WebRootPath + "\\Images\\Curtains\\", image);
+                style.ImageName = path.ToString();
             }
 
             if (ModelState.IsValid)
@@ -118,31 +132,16 @@ namespace Oguz.Controllers
         }
 
         // GET: Styles/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public IActionResult Delete(Guid? id)
         {
-            if (id == null)
+            var style = _context.Styles.Find(id);
+            string MaterialImagePath = _appEnvironment.ApplicationName + "\\Images\\Styles\\" + style.ImageName;
+            if (System.IO.File.Exists(MaterialImagePath))
             {
-                return NotFound();
+                System.IO.File.Delete(MaterialImagePath);
             }
-
-            var style = await _context.Styles
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (style == null)
-            {
-                return NotFound();
-            }
-
-            return View(style);
-        }
-
-        // POST: Styles/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            var style = await _context.Styles.FindAsync(id);
             _context.Styles.Remove(style);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 

@@ -28,10 +28,10 @@
                                 <span class="caret-down"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
                             </a>
                             <div class="dropdown-menu" style="display: none">
-                                <a class="dropdown-item" href="#">Шторы</a>
-                                <a class="dropdown-item" href="#">Гардины</a>
-                                <a class="dropdown-item" href="#">Подушки</a>
-                                <a class="dropdown-item" href="#">Акссесуары</a>
+                                <a class="dropdown-item" asp-controller="OrderCurtains" asp-action="Index" asp-category="@Category.Curtains">Шторы</a>
+                                <a class="dropdown-item" asp-controller="OrderCurtains" asp-action="Index" asp-category="@Category.Shades">Гардины</a>
+                                <a class="dropdown-item" asp-controller="" asp-action="Index" asp-category="@Category.Pillows">Подушки</a>
+                                <a class="dropdown-item" asp-controller="" asp-action="Index" asp-category="@Category.Accessories">Акссесуары</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -76,10 +76,10 @@
                                     Купить
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Шторы</a>
-                                    <a class="dropdown-item" href="#">Гардины</a>
-                                    <a class="dropdown-item" href="#">Подушки</a>
-                                    <a class="dropdown-item" href="#">Акссесуары</a>
+                                    <a class="dropdown-item" asp-controller="CurtainsOrder" asp-action="Index" asp-category="@Category.Curtains">Шторы</a>
+                                    <a class="dropdown-item" asp-controller="CurtainsOrder" asp-action="Index" asp-category="@Category.Shades">Гардины</a>
+                                    <a class="dropdown-item"  asp-controller="" asp-action="Index" asp-category="@Category.Pillows">Подушки</a>
+                                    <a class="dropdown-item"  asp-controller="" asp-action="Index" asp-category="@Category.Accessories">Акссесуары</a>
                                 </div>
                             </li>
                             <li class="nav-item">
@@ -94,7 +94,7 @@
             </nav>
         </div>
     </header>
-    <div class="container">
+    <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -151,6 +151,7 @@
     <script src="~/js/preloader.js"></script>
     <script src="~/js/Subscribe.js"></script>
     <script src="~/js/dropdown-menu.js"></script>
+    <script src="~/js/orderProgressBar.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

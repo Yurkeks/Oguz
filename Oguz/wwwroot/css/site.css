@@ -320,6 +320,7 @@ input[type="submit"] {
     width: 25px;
 }
 #orderProgressBar {
+    margin-top: 50px;
     background-color: #f3f3f3;
     padding: 20px 0px 40px;
 }
@@ -344,4 +345,67 @@ input[type="submit"] {
 
 .completed_step {
     background-color: #3CB371;
+}
+
+/*styles*/
+.style-wrapper {
+    margin-bottom: 50px;
+}
+.style-image {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+.style-image img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+}
+.style-description {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 400;
+}
+.style-description p {
+    margin-bottom: 10px;
+}
+.style-name {
+    margin-top: 10px;
+}
+.selectButton {
+    background: #ffb5a0;
+    color: #ffffff;
+    border: 1px solid #ffb5a0;
+    padding: 0 20px;
+    text-align: center;
+    cursor: pointer;
+    min-height: 42px;
+    height: 40px;
+    line-height: 1.2;
+    vertical-align: top;
+    font-weight: normal;
+    font-size: 14px;
+    letter-spacing: 1px;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    transition: all 0.2s linear;
+    -webkit-appearance: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.selectButton:hover {
+    background: #de9f8e;
+    border: 1px solid #de9f8e;
+    color: #fff;
 }

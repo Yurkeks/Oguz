@@ -1,0 +1,45 @@
+﻿@model List<Style>
+
+
+@{
+    ViewData["Title"] = "Style";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<input type="hidden" id="prgoressBarStep" name="step" value="style">
+<div id="progressBar"></div>
+
+<div class="container">
+    <div class="product_description">
+        <h2 class="product_heading">Custom Curtains</h2>
+        <p>
+            Starting prices are for a 40”x80” curtain.
+            <br />
+            Design yours now and we’ll ship it your way in 10 days or less
+        </p>
+        <p>Select your style below to get started.</p>
+    </div>
+
+    <div class="styles row">
+        @foreach (var style in Model)
+        {
+            <div class="col-lg-6">
+                <div class="style-wrapper">
+                    <div class="style-image">
+                        <img src="~/Images/Styles/@style.ImageName" alt="Style" />
+                    </div>
+                    <div class="style-name">
+                        <h3>@style.Name</h3>
+                    </div>
+                    <div class="style-description">
+                        <p>@style.Description</p>
+                    </div>
+                    <a class="selectButton" asp-action="Fabric" asp-route-styleId="@style.Id">Select & Continue</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+    
+
