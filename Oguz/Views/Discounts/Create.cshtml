@@ -1,0 +1,43 @@
+﻿@model Oguz.Models.Discount
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="CRUD-container">
+    <h1>Добавление скидки</h1>
+    <div><a class="btn btn-backtolist mt-4 mb-1" role="button" asp-action="Index">Назад к списку</a></div>
+    <hr />
+    <div class="row">
+        <div class="col-md-5">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label class="control-label">Название</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Погонные метры:</label>
+                    <input asp-for="LinearMeters" class="form-control" />
+                    <span asp-validation-for="LinearMeters" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Скидка (%): </label>
+                    <input asp-for="Value" class="form-control" />
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Показывать на сайте?</label>
+                    <input type="checkbox" asp-for="Active" class="form-control col-8" />
+                    <span asp-validation-for="Active" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

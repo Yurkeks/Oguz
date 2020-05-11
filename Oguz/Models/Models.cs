@@ -16,14 +16,17 @@ namespace Oguz.Models
         public string Name { get; set; }
         public bool Active { get; set; }
     }
+
     public class City : BaseDbObject
     {
         public Guid CountryId { get; set; }
+        public Country Country { get; set; }
     }
+
     public class Country : BaseDbObject
     {
-
     }
+
     public class Order : BaseDbObject
     {
         public int Price { get; set; }
@@ -39,6 +42,11 @@ namespace Oguz.Models
         public Color Color { get; set; }
         public Guid MaterialId { get; set; }
         public Material Material { get; set; }
+        public Guid? DiscountId { get; set; }
+        public Discount Discount { get; set; }
+        public Guid? CityId { get; set; }
+        public City City { get; set; }
+        public string PostCode { get; set; }
     }
 
     public class Style : BaseDbObject
@@ -91,6 +99,7 @@ namespace Oguz.Models
     public class Brand : BaseDbObject
     {
     }
+
     public class SMTPClient : BaseDbObject
     {
         public int Port { get; set; }
@@ -98,6 +107,7 @@ namespace Oguz.Models
         public string Password { get; set; }
         public string Host { get; set; }
     }
+
     public class Discount : BaseDbObject
     {
         public int Value { get; set; }
