@@ -60,14 +60,14 @@ namespace Oguz.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Style style, IFormFile image)
         {
-            if (image != null)
-            {
-                var path = FilesHelper.UploadFile(_appEnvironment.WebRootPath + "\\Images\\Styles\\", image);
-                style.ImageName = path.ToString();
-            }
             if (ModelState.IsValid)
             {
-                style.Id = Guid.NewGuid();
+                if (image != null)
+                {
+                    var path = FilesHelper.UploadFile(_appEnvironment.WebRootPath + "\\Images\\Styles\\", image);
+                    style.ImageName = path.ToString();
+                }
+                style.Id = new Guid();
                 _context.Add(style);
                 await _context.SaveChangesAsync();
             }

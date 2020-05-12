@@ -347,31 +347,31 @@ input[type="submit"] {
     background-color: #3CB371;
 }
 
-/*styles*/
-.style-wrapper {
+/*product/order*/
+.product-wrapper {
     margin-bottom: 50px;
 }
-.style-image {
+.product-image {
     width: 100%;
     height: 300px;
     position: relative;
     overflow: hidden;
 }
-.style-image img {
+.product-image img {
     width: 100%;
     height: 100%;
     position: absolute;
     right: 0;
 }
-.style-description {
+.product-description {
     margin-top: 10px;
     font-size: 18px;
     font-weight: 400;
 }
-.style-description p {
+.product-description p {
     margin-bottom: 10px;
 }
-.style-name {
+.product-name {
     margin-top: 10px;
 }
 .selectButton {

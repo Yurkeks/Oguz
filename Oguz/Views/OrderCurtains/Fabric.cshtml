@@ -1,15 +1,42 @@
-﻿@model OrderDto 
+﻿@model OrderDto
 @{
     ViewData["Title"] = "Fabric";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Fabric</h1>
+<input type="hidden" id="prgoressBarStep" name="step" value="fabric">
+<div id="progressBar"></div>
 
-@foreach (var material in Model.Materials)
-{
-    <div>@material.Name</div>
-    var orderDto = Model;
-    orderDto.MaterialId = material.Id;
-    <a asp-action="Color" asp-route-orderDto="@orderDto"></a>
-}
+<div class="container">
+    <div class="product_description">
+        <p>Thanks for choosing your curtain style!</p>
+        <p>Select a fabric below to continue.</p>
+        <br />
+        <h2 class="product_heading">Fabrics</h2>
+    </div>
+    <hr />
+    @foreach (var material in Model.Materials)
+    {
+        <div class="col-lg-4">
+            <div class="product-wrapper">
+                <div class="product-image">
+                    <img src="~/Images/Materials/@material.ImageName" alt="Material" />
+                </div>
+                <div class="product-name">
+                    <h3>@material.Name</h3>
+                </div>
+                <div class="product-description">
+                    <p>@material.Description</p>
+                </div>
+                <input type="hidden" name="materialId" value="@material.Id" />
+                <input type="hidden" name="styleId" value="@Model.StyleId" />
+                <a asp-action="Color" asp-route-materialId="@material.Id" asp-route-styleId="@Model.StyleId" class="selectButton">
+                    Select & Continue
+                </a>
+                @*<input asp-action="Color" id="selectFabric-js" type="button" class="selectButton"  value="Select & Continue" />*@
+            </div>
+        </div>
+    }
+</div>
+
+
