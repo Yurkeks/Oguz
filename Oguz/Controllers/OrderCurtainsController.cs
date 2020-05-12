@@ -51,10 +51,19 @@ namespace Oguz.Controllers
             };
             return View(orderDto);
         }
-        public IActionResult Size(Guid colorId)
+        public IActionResult Size(OrderDto model)
         {
-            //order.ColorId = colorId;
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return NotFound();
+            }
+            orderDto = new OrderDto()
+            {
+                MaterialId = model.MaterialId,
+                StyleId = model.StyleId,
+                ColorId = model.ColorId
+            };
+            return View(orderDto);
         }
         //[HttpGet]
         //public IActionResult Completion(List<Size> sizes)
