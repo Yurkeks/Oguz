@@ -441,3 +441,6 @@ input[type="submit"] {
     position: absolute;
     background-image: url(~/Images/Colors/red.jpg);
 }
+.active-color {
+    border:2px solid #006400;
+}
