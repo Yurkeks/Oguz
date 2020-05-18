@@ -1,0 +1,49 @@
+﻿@model Oguz.Models.SMTPClient
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+}
+
+<div class="CRUD-container">
+    <h1>Изменение настроек почты</h1>
+    <div><a class="btn btn-backtolist btn-light mt-4 mb-1" role="button" asp-action="Index">Назад к списку</a></div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Port" class="control-label"></label>
+                    <input asp-for="Port" class="form-control" />
+                    <span asp-validation-for="Port" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input id="password" asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Host" class="control-label"></label>
+                    <input asp-for="Host" class="form-control" />
+                    <span asp-validation-for="Host" class="text-danger"></span>
+                </div> 
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

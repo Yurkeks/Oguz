@@ -10,22 +10,22 @@ using Oguz.Models;
 
 namespace Oguz.Controllers
 {
-    public class DiscountsController : Controller
+    public class SMTPClientsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public DiscountsController(ApplicationDbContext context)
+        public SMTPClientsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Discounts
+        // GET: SMTPClients
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Discounts.OrderBy(d => d.LinearMeters).ToListAsync());
+            return View(await _context.SMTPClients.ToListAsync());
         }
 
-        // GET: Discounts/Details/5
+        // GET: SMTPClients/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -33,40 +33,40 @@ namespace Oguz.Controllers
                 return NotFound();
             }
 
-            var discount = await _context.Discounts
+            var sMTPClient = await _context.SMTPClients
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (discount == null)
+            if (sMTPClient == null)
             {
                 return NotFound();
             }
 
-            return View(discount);
+            return View(sMTPClient);
         }
 
-        // GET: Discounts/Create
+        // GET: SMTPClients/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Discounts/Create
+        // POST: SMTPClients/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Value,LinearMeters,Id,Name,Active")] Discount discount)
+        public async Task<IActionResult> Create([Bind("Port,Email,Password,Host,Id,Name,Active")] SMTPClient sMTPClient)
         {
             if (ModelState.IsValid)
             {
-                discount.Id = Guid.NewGuid();
-                _context.Add(discount);
+                sMTPClient.Id = Guid.NewGuid();
+                _context.Add(sMTPClient);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(discount);
+            return View(sMTPClient);
         }
 
-        // GET: Discounts/Edit/5
+        // GET: SMTPClients/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -74,22 +74,22 @@ namespace Oguz.Controllers
                 return NotFound();
             }
 
-            var discount = await _context.Discounts.FindAsync(id);
-            if (discount == null)
+            var sMTPClient = await _context.SMTPClients.FindAsync(id);
+            if (sMTPClient == null)
             {
                 return NotFound();
             }
-            return View(discount);
+            return View(sMTPClient);
         }
 
-        // POST: Discounts/Edit/5
+        // POST: SMTPClients/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Value,LinearMeters,Id,Name,Active")] Discount discount)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Port,Email,Password,Host,Id,Name,Active")] SMTPClient sMTPClient)
         {
-            if (id != discount.Id)
+            if (id != sMTPClient.Id)
             {
                 return NotFound();
             }
@@ -98,12 +98,12 @@ namespace Oguz.Controllers
             {
                 try
                 {
-                    _context.Update(discount);
+                    _context.Update(sMTPClient);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DiscountExists(discount.Id))
+                    if (!SMTPClientExists(sMTPClient.Id))
                     {
                         return NotFound();
                     }
@@ -114,23 +114,21 @@ namespace Oguz.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(discount);
+            return View(sMTPClient);
         }
 
+        // GET: SMTPClients/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
-            var discount = await _context.Discounts.FindAsync(id);
-            if (discount != null)
-            {
-                _context.Discounts.Remove(discount);
-                await _context.SaveChangesAsync();
-            }
+            var sMTPClient = await _context.SMTPClients.FindAsync(id);
+            _context.SMTPClients.Remove(sMTPClient);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DiscountExists(Guid id)
+        private bool SMTPClientExists(Guid id)
         {
-            return _context.Discounts.Any(e => e.Id == id);
+            return _context.SMTPClients.Any(e => e.Id == id);
         }
     }
 }
