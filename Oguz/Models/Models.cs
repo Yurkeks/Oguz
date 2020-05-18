@@ -25,6 +25,7 @@ namespace Oguz.Models
 
     public class Country : BaseDbObject
     {
+        List<City> Cities { get; set; }
     }
 
     public class Order : BaseDbObject
