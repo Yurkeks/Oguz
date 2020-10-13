@@ -3,6 +3,7 @@
 function createProgressBarContainer() {
     var progressBarContainer = document.createElement('div');
     progressBarContainer.classList.add('container-fluid');
+    progressBarContainer.classList.add('ProgressBarContainer');
     progressBarContainer.setAttribute('id', 'orderProgressBar');
     return progressBarContainer;
 }
@@ -35,7 +36,7 @@ function createThroughStepsLine() {
 }
 
 function createProgressBarList() {
-    var stepsNames = ['style', 'fabric', 'color', 'size', 'panels', 'linear'];
+    var stepsNames = ['Стиль', 'Ткань', 'Цвет', 'Размер', 'Завершение'];
     var ulClasses = ['progressBar_container', 'container'];
 
     var progressBar = document.createElement('ul');

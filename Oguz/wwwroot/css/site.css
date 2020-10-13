@@ -173,7 +173,7 @@ a:hover {
     color: #1b1f23;
 }
 .bigDevice-header {
-    padding-top: 10px;
+    padding-top: 4px;
 }
 @media only screen and (max-width : 570px) {
     .smallDevice-header {
@@ -249,8 +249,19 @@ input[type="email"] {
 
 input[type="submit"] {
     border: 1px solid #cccccc;
-    height: 41px;
-    background-color: #dc9c6b;
+    height: 35px;
+    background-color: #01796f;
+    color: white;
+    border-radius: 3px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+input[type="button"] {
+    border: 1px solid #cccccc;
+    height: 35px;
+    background-color: #01796f;
+    color: white;
     border-radius: 3px;
     padding-left: 15px;
     padding-right: 15px;
@@ -307,6 +318,7 @@ input[type="submit"] {
     text-align: center;
     margin: 0 auto;
     position: relative;
+    max-width: 50%;
 }
 .progressBar_container li {
     list-style-type: none;
@@ -319,14 +331,15 @@ input[type="submit"] {
     line-height: 25px;
     margin: 0 auto;
     width: 25px;
+    padding-bottom:5px;
 }
 #orderProgressBar {
     margin: 50px auto;
     background-color: #f3f3f3;
-    padding: 20px 0px 40px;
+    padding: 15px 0px 10px;
 }
 .progressBar_step-text {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 
@@ -441,6 +454,183 @@ input[type="submit"] {
     position: absolute;
     background-image: url(~/Images/Colors/red.jpg);
 }
-.active-color {
-    border:2px solid #006400;
+
+.swatch-img img{
+    max-height: 100%;
+    max-width: 570px;
 }
+
+
+.active-color {
+    border: 2px solid #006400;
+}
+
+.userData {
+    padding-top: 20px;
+    border: 2px solid #006400;
+}
+
+.inputWithIcon input {
+    padding-left: 53px !important;
+}
+
+.inputWithIcon {
+    position: relative;
+}
+
+    .inputWithIcon i {
+        position: absolute;
+        left: 10px;
+        top: 0px;
+        background-color: #01796f;
+        color: white;
+        transition: .3s;
+    }
+
+    .inputWithIcon input:focus + i {
+        color: yellow;
+    }
+
+.f-16{
+    font-size: 16px;
+}
+
+.scale-140-per {
+    transform: scale(1.4);
+}
+
+.loginContainer {
+    margin: 80px auto 60px auto;
+    padding: 40px 30px 30px 30px;
+    align-content: center;
+    border-radius: 7px;
+    background: #f2f2f2;
+}
+
+.email-icon {
+    padding: 11px 26px 13px 7px;
+}
+
+.pass-icon {
+    padding: 12px 23px 12px 10px;
+}
+
+.sign-up {
+    text-align: center;
+    font-size: 16px;
+}
+
+    .sign-up a {
+        text-decoration: underline;
+        color: #01796f;
+        font-weight: 600;
+    }
+
+        .sign-up a:hover {
+            color: #42b7e8;
+        }
+
+.centr-container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.inLine {
+    display: inline-block;
+}
+
+
+.defaultUserIcon {
+    margin-left: calc(100% / 2 - 50px);
+    margin-top: -130px;
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.centr-container h2 {
+    text-align: center;
+    padding-right: 5px;
+}
+
+.login-button {
+    background-color: #0F4C81;
+    width: 120px;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+}
+
+#loginForm .form-control {
+    border-radius: 5px;
+    border: 2px solid #eceeee;
+    font: 16px 'Ubuntu', sans-serif;
+    padding: 10px 12px;
+    height: 40px;
+}
+
+    #loginForm .form-control:focus {
+        border-color: #01796f !important;
+        border: 2px solid #01796f;
+        outline: 0;
+        box-shadow: none;
+    }
+
+.navbar-nav.navbar-center {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.contacts-container {
+    max-width: 500px;
+    margin: 80px auto 60px auto;
+    padding: 40px 30px 30px 30px;
+    align-content: center;
+    border-radius: 7px;
+    background: #01796f;
+    color: white
+}
+
+.bg-contacts{
+    background-color:aquamarine;
+}
+
+.container-pb {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.progressbar li {
+    float: left;
+    width: 20%;
+    position: relative;
+    text-align: center;
+}
+
+.progressbar {
+    counter-reset: step;
+}
+
+    .progressbar li:before {
+        content: counter(step);
+        counter-increment: step;
+        width: 30px;
+        height: 30px;
+        border: 2px solid #bebebe;
+        display: block;
+        margin: 0 auto 10px auto;
+        border-radius: 50%;
+        line-height: 27px;
+        background: white;
+        color: #bebebe;
+        text-align: center;
+        font-weight: bold;
+    }

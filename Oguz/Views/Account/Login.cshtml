@@ -1,0 +1,79 @@
+﻿@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Вход";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<div class="row pt-30px">
+        <div class="col-md-6">
+            <h2>Вход в аккаунт</h2>
+            <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div>
+                    <label>Email</label><br />
+                    <input asp-for="Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <div>
+                    <label>Пароль</label><br />
+                    <input asp-for="Password" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div>
+                    <label>Запомнить пароль?</label><br />
+                    <input asp-for="RememberMe" />
+                </div>
+                <div>
+                    <input type="submit" value="Войти" />
+                </div>
+            </form>
+        </div>
+    </div>*@
+
+<div class="container">
+    <div class="row">
+        <div class="loginContainer">
+
+            <div class="ml-2 mb-4">
+                <div class="centr-container"><h2>@ViewBag.Title</h2></div>
+            </div>
+
+            <section id="loginForm">
+                <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group col">
+                        <div class="inputWithIcon">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", placeholder = "Email" })
+                            <i class="fa fa-envelope fa-lg fa-fw email-icon" aria-hidden="true"></i>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col">
+                        <div class="inputWithIcon">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", type = "password", placeholder = "Пароль" })
+                            <i class="fa fa-lock fa-lg fa-fw pass-icon" aria-hidden="true"></i>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col ml-4 pl-3">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "remember-checkbox scale-140-per ml-3" })
+                        @Html.LabelFor(m => m.RememberMe, "Запомнить меня", new { @class = "mt-0 pl-4 f-16" })
+                    </div>
+
+                    <div class="form-group">
+                        <div class="centr-container">
+                            <input type="submit" value="Войти" class="loginButton" />
+                        </div>
+                    </div>
+                    <div class="sign-up">
+                        <p>Ещё нет аккаунта? @Html.ActionLink("Регистрация", "Register")</p>
+                    </div>
+                    <div class="sign-up">
+                        @Html.ActionLink("Восстановить пароль", "ForgotPassword")
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>

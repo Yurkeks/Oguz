@@ -22,6 +22,9 @@
                         <li class="nav-item">
                             <a class=" text-dark" asp-area="" asp-action="Orders">Заказы</a>
                         </li>
+                        <li class="nav-item">
+                            <a class=" text-dark" asp-area="" asp-action="Orders">Клиенты</a>
+                        </li>
                         <li class="dropdown">
                             <a class=" text-dark" href="#">
                                  Данные
@@ -44,18 +47,14 @@
                             </a>
                             <div class="dropdown-menu" style="display: none">
                                 <a class="dropdown-item" asp-controller="SMTPClients">Почта</a>
-                                <a class="dropdown-item" href="#">Роли</a>
+                                <a class="dropdown-item" asp-controller="Roles">Роли</a>
                                 <a class="dropdown-item" asp-controller="Discounts" asp-action="Index">Скидки</a>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="basket">
-                    <a href="/" class="basket-icon">
-                        <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-                        <span id="basket-count">0</span>
-                    </a>
-                    <div id="basket-sum">$0.00</div>
+                <div class="">
+                    Посещений: 23
                 </div>
             </div>
         </div>
@@ -64,11 +63,7 @@
                 <div class="container">
                     <a class="navbar-brand" asp-area="" asp-controller="Admin" asp-action="Index">Admin Panel</a>
                     <div class="basket">
-                        <a href="/" class="basket-icon">
-                            <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-                            <span id="basket-count">0</span>
-                        </a>
-                        <div id="basket-sum">$0.00</div>
+                        Посещений: 23
                     </div>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">

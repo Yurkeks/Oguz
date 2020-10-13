@@ -57,5 +57,10 @@ namespace Oguz.Controllers
                 _context.SaveChanges();
             }
         }
+
+        public ActionResult Contacts()
+        {
+            return View();
+        }
     }
 }

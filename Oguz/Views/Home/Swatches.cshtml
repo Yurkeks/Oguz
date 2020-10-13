@@ -4,22 +4,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="text-center">
+<div class="text-center container p-0">
     <h1 class="display-4">Welcome</h1>
     @{
         foreach (var Item in Model)
         {
-            <div class="text-left">
+            <div class="text-left pt-4 pb-5">
                 <h3>@Item.Name</h3>
                 <p>@Item.Brand.Name | @Item.FabricStructure | @Item.CareInstructions</p>
                 <div class="row">
-                    <div class="col-6 material-img img-fluid p-0">
+                    <div class="col-6 swatch-img p-0">
                         <img src="~/Images/Curtains/@Item.ImageName" />
                     </div>
                     <div class="col-6 row text-center p-0">
                         @{ foreach (var color in Item.Colors)
                             {
-                                <div class="col-3 p-0 pl-2">
+                                <div class="col-3 p-0 pl-2" style="max-height:212px">
                                     <div class="color-img"><img src="~/Images/Colors/@color.ImageName" /></div>
                                     <div class="color-text">@color.Name</div>
                                     <div><a class="btn m-0 p-0 color-btn" role="button" asp-action="Create">Выбрать</a></div>

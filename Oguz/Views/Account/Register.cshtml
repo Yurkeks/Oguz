@@ -1,0 +1,124 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div class="container">
+    <h1>Регистрация</h1>
+    <div class="row pt-30px">
+        <div class="col-md-6">
+            <form method="post" asp-controller="Account" asp-action="Register">
+                <div asp-validation-summary="ModelOnly"></div>
+
+                <div class="form-group row">
+                    <label class="control-label col-4">Email: </label>
+                    <input asp-for="Email" class="form-control col-7" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-4">Пароль: </label>
+                    <input asp-for="Password" class="form-control col-7" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-4">Подтверждение пароля: </label>
+                    <input asp-for="PasswordConfirm" class="form-control col-7" />
+                    <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row pt-3">
+                    <label class="control-label col-4">Имя: </label>
+                    <input asp-for="FirstName" class="form-control col-7" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-4">Фамилия: </label>
+                    <input asp-for="LastName" class="form-control col-7" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <label class="control-label col-4">Город: </label>
+                    <input asp-for="City" class="form-control col-7" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group row">
+                    <label class="control-label col-4">Отделение Новой Почты: </label>
+                    <input asp-for="PostCode" class="form-control col-7" />
+                    <span asp-validation-for="PostCode" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <input type="submit" value="Регистрация" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>*@
+
+
+<div class="container">
+    <div class="row">
+        <div class="loginContainer">
+
+            <div class="ml-2 mb-4 pb-3">
+                <div class="centr-container"><h2>Регистрация</h2></div>
+            </div>
+
+            <section id="loginForm">
+                <form method="post" asp-controller="Account" asp-action="Register">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group row">
+                        <label class="control-label col-4">Email: </label>
+                        <input asp-for="Email" type="email" class="form-control col-7" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-4">Пароль: </label>
+                        <input asp-for="Password" class="form-control col-7" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-4">Повтор пароля: </label>
+                        <input asp-for="PasswordConfirm" class="form-control col-7" />
+                        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group row pt-4">
+                        <label class="control-label col-4">Имя: </label>
+                        <input asp-for="FirstName" class="form-control col-7" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-4">Фамилия: </label>
+                        <input asp-for="LastName" class="form-control col-7" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-4">Город: </label>
+                        <input asp-for="City" class="form-control col-7" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-4">Отделение Новой Почты: </label>
+                        <input asp-for="PostCode" class="form-control col-7" />
+                        <span asp-validation-for="PostCode" class="text-danger"></span>
+                    </div>
+
+                    <div class="centr-container">
+                        <input type="submit" value="Отправить" />
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>

@@ -8,17 +8,22 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/Animation.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div id="preloader">
         <div class="cssload-wrench"></div>
     </div>
     <header>
-        <div class="bigDevice-header ">
-            <div class="container d-flex justify-content-between align-items-center">
-                <a class="nav-brand" asp-area="" asp-controller="Admin" asp-action="Index">Oguz</a>
-                <div class="nav-menu">
-                    <ul class="d-flex">
+        <div class="bigDevice-header">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="nav-brand" asp-area="" asp-controller="Admin" asp-action="Index">Oguz</a>
+                    </div>
+                    <ul class="nav navbar-center">
                         <li class="nav-item">
                             <a class=" text-dark" asp-area="" asp-controller="Home" asp-action="Swatches">Образцы</a>
                         </li>
@@ -38,18 +43,52 @@
                             <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Скидки</a>
                         </li>
                         <li class="nav-item">
-                            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Контакты</a>
+                            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Contacts">Контакты</a>
                         </li>
                     </ul>
+
+                    <ul class="nav  navbar-right">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="dropdown  navbar-right">
+                                <a class=" text-dark" href="#">
+                                    @User.Identity.Name
+                                    <span class="caret-down"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                                </a>
+                                <div class="dropdown-menu" style="display: none">
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Profile">Профиль</a>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Orders" asp-category="@Category.Pillows">Мои заказы</a>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Logout" asp-category="@Category.Accessories">Выйти</a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <div class="mb-0 row align-items-center">
+                                    <div>
+                                        <a asp-controller="Account" asp-action="Login">
+                                            <input type="button" value="Войти" />
+                                        </a>
+                                    </div>
+                                    <div class="pl-3 pr-2">
+                                        <a asp-controller="Account" asp-action="Register">Регистрация</a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                        @*<li class="navbar-right">
+                            <div class="basket pl-3">
+                                <a href="/" class="basket-icon">
+                                    <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
+                                    <span id="basket-count">0</span>
+                                </a>
+                                <div id="basket-sum">$0.00</div>
+                            </div>
+                        </li>*@
+                    </ul>
                 </div>
-                <div class="basket">
-                    <a href="/" class="basket-icon">
-                        <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
-                        <span id="basket-count">0</span>
-                    </a>
-                    <div id="basket-sum">$0.00</div>
-                </div>
-            </div>
+            </nav>
         </div>
         <div class="smallDevice-header">
             <nav class="navbar navbar-expand-sm navbar-toggleable-lg navbar-light mb-3 border-bottom box-shadow">
@@ -78,15 +117,15 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" asp-controller="CurtainsOrder" asp-action="Index" asp-category="@Category.Curtains">Шторы</a>
                                     <a class="dropdown-item" asp-controller="CurtainsOrder" asp-action="Index" asp-category="@Category.Shades">Гардины</a>
-                                    <a class="dropdown-item"  asp-controller="" asp-action="Index" asp-category="@Category.Pillows">Подушки</a>
-                                    <a class="dropdown-item"  asp-controller="" asp-action="Index" asp-category="@Category.Accessories">Акссесуары</a>
+                                    <a class="dropdown-item" asp-controller="" asp-action="Index" asp-category="@Category.Pillows">Подушки</a>
+                                    <a class="dropdown-item" asp-controller="" asp-action="Index" asp-category="@Category.Accessories">Акссесуары</a>
                                 </div>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Скидки</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Контакты</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacts">Контакты</a>
                             </li>
                         </ul>
                     </div>
@@ -106,8 +145,10 @@
                 <h2>Подпишись</h2>
                 <div class="wrap-normal">Просто введи email чтобы получать уведомления о новых коллекциях и распродажах</div>
                 <br />
-                <input id="Subscribe" type="email" class="contact_email" name="contact[email]" required="" placeholder="Enter your email address...">
-                <input id="SubscribeButton" type="submit" class="action_button sign_up btn" value="ОК">
+                <div class="row mr-0 ml-0" style="display:block">
+                    <input id="Subscribe" type="email" class="contact_email" name="contact[email]" required="" placeholder="Enter your email address...">
+                    <input id="SubscribeButton" type="submit" class="action_button sign_up btn" value="ОК">
+                </div>
             </div>
         </div>
         <div class="container pt-4">

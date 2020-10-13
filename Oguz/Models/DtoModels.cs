@@ -13,4 +13,16 @@ namespace Oguz.Models
         public Guid ColorId { get; set; }
         public Material Material { get; set; }
     }
+
+    public class Chart : BaseDbObject
+    {
+
+    }
+
+    public class ChartDto
+    {
+        public string[] DataLabels { get; set; }
+        public string[] DatasetsLabels { get; set; }
+
+    }
 }

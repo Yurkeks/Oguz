@@ -6,18 +6,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<input type="hidden" id="prgoressBarStep" name="step" value="style">
-<div id="progressBar"></div>
+@*<input type="hidden" id="prgoressBarStep" name="step" value="style">
+<div id="progressBar"></div>*@
+
+<div class="root">
+    <div class="container-pb">
+        <ul class="progressbar">
+            <li>Step 1</li>
+            <li>Step 2</li>
+            <li>Step 3</li>
+            <li>Step 4</li>
+            <li>Step 5</li>
+        </ul>
+    </div>
+</div>
+
 
 <div class="container">
     <div class="product_description">
-        <h2 class="product_heading">Custom Curtains</h2>
+        <h2 class="product_heading">Вы в конструкторе заказа</h2>
         <p>
-            Starting prices are for a 40”x80” curtain.
-            <br />
-            Design yours now and we’ll ship it your way in 10 days or less
+            Выберите стиль пошива, чтобы продолжить
         </p>
-        <p>Select your style below to get started.</p>
     </div>
 
     <div class="styles row">
