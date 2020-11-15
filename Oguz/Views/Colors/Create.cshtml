@@ -8,7 +8,7 @@
 
 <div class="CRUD-container">
     <h1>Добавление Цвета</h1>
-    <div><a class="btn btn-backtolist btn-light mt-4 mb-1" role="button" asp-action="Index" asp-route-id="@Model.MaterialId">Назад к списку</a></div>
+    <div><a class="btn btn-backtolist btn-light mt-4 mb-1" role="button" asp-action="Index" asp-route-id="@Model.ProductId">Назад к списку</a></div>
     <hr />
     <div class="row">
         <div class="col-md-5">
@@ -23,7 +23,7 @@
                     <label class="control-label col-4">Фото: </label>
                     <input type="file" class="col-8" style="margin-left:-15px" name="image" />
                     <input type="hidden" asp-for="Id" />
-                    <input type="hidden" asp-for="MaterialId" />
+                    <input type="hidden" asp-for="ProductId" />
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Добавить" class="btn btn-primary" />

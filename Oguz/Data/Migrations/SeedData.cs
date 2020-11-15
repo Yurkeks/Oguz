@@ -12,11 +12,11 @@ namespace Oguz.Data.Migrations
     {
         public static void Initialize(IServiceProvider services)
         {
-            var db = services.GetRequiredService<ApplicationDbContext>();
-            if (db.Materials.Any())
-            {
-                return;
-            }
+            //var db = services.GetRequiredService<ApplicationDbContext>();
+            //if (db.Materials.Any())
+            //{
+            //    return;
+            //}
             //seed code
             //Order order = new Order()
             //{

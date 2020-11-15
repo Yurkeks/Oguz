@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "CurtainsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="app">
+    <div class="container">
+        <template v-for="item in curtainsList">
+            <div class="col-3">
+                <img v-bind:src="item.imageName"class="CurtainsShopPhoto"/>
+                <div>{{ item.name }}</div>
+            </div>
+        </template>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="~/js/Shop/CurtainsList.js"></script>

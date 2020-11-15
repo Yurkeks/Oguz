@@ -13,15 +13,15 @@ namespace Oguz.Data
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<Size> Sizes { get; set; }
-        public DbSet<Style> Styles { get; set; } 
-        public DbSet<Material> Materials { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<SMTPClient> SMTPClients { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Pillow> Pillows { get; set; }
+        public DbSet<Curtains> Curtains { get; set; }
+        public DbSet<Product> Products { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

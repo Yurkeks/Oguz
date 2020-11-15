@@ -22,11 +22,11 @@ namespace Oguz.Controllers
             return View();
         }
 
-        public IActionResult Swatches()
-        {
-            var materials = _context.Materials.Include(c => c.Colors).Include(c => c.Brand).Where(m => m.Category == Category.Curtains || m.Category == Category.Shades).ToList();
-            return View(materials);
-        }
+        //public IActionResult Swatches()
+        //{
+        //    var materials = _context.Materials.Include(c => c.Colors).Include(c => c.Brand).Where(m => m.Category == Category.Curtains || m.Category == Category.Shades).ToList();
+        //    return View(materials);
+        //}
 
         public IActionResult Privacy()
         {

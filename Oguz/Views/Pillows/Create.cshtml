@@ -1,10 +1,9 @@
-﻿@model Oguz.Models.Material
+﻿@model Oguz.Models.Pillow
 
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Admin/_AdminLayout.cshtml";
 }
-
 
 <div class="CRUD-container">
     <h1>Добавление подушки</h1>
@@ -28,33 +27,23 @@
                     @Html.TextAreaFor(m => m.Description, new { @class = "col-8 form-control" })
                 </div>
                 <div class="form-group row">
-                    <label class="control-label col-4">Стркуктура: </label>
-                    <input asp-for="FabricStructure" class="form-control col-8" />
-                    <span asp-validation-for="FabricStructure" class="text-danger"></span>
-                </div>
-                <div class="form-group row">
-                    <label class="control-label col-4">Ширина: </label>
-                    <input type="number" asp-for="Size.Width" class="form-control col-8" required />
-                </div>
-                <div class="form-group row">
-                    <label class="control-label col-4">Высота: </label>
-                    <input type="number" asp-for="Size.Height" class="form-control col-8" required />
-                </div>
-                <div class="form-group row">
                     <label class="control-label col-4">Стоимость: </label>
-                    <input type="number" asp-for="Cost" class="form-control col-8" required />
-                    <span asp-validation-for="Cost" class="text-danger"></span>
-                </div>
-                <div class="form-group row">
-                    <label class="control-label col-4">Показывать на сайте?</label>
-                    <input type="checkbox" asp-for="Active" class="form-control col-8" />
-                    <span asp-validation-for="Active" class="text-danger"></span>
+                    <input type="number" asp-for="Price" class="form-control col-8" required />
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
                 <div class="form-group row">
                     <label class="control-label col-4">Фото: </label>
                     <input type="file" class="col-8" name="image" />
                 </div>
-                <div class="form-group">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="custom-control custom-checkbox col">
+                        <input type="checkbox" asp-for="Active" class="custom-control-input" id="defaultUnchecked">
+                        <label class="custom-control-label" for="defaultUnchecked">Показывать на сайте</label>
+                    </div>
+                </div>
+                <div class="form-group row mt-4">
+                    <label class="control-label col-4"></label>
                     <input type="submit" value="Добавить" class="btn btn-primary" />
                 </div>
             </form>

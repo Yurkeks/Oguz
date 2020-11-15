@@ -27,10 +27,10 @@ namespace Oguz.Controllers
         // GET
         public IActionResult Index()
         {
-            var materials = _context.Materials.Where(p => p.Category == Category.Pillows).Include(m => m.Brand).Include(c => c.Colors).ToList();
-            if (materials == null || materials.Count == 0)
+            var pillow = _context.Pillows.Include(m => m.Brand).Include(c => c.Colors).ToList();
+            if (pillow == null || pillow.Count == 0)
                 return RedirectToAction(nameof(Create));
-            return View(materials);
+            return View(pillow);
         }
 
         // GET
@@ -43,26 +43,26 @@ namespace Oguz.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Material material, IFormFile image)
+        public async Task<IActionResult> Create(Pillow pillow, IFormFile image)
         {
             if (image != null)
             {
                 var path = FilesHelper.UploadFile(_appEnvironment.WebRootPath + "\\Images\\Pillows\\", image);
-                material.ImageName = path.ToString();
+                pillow.ImageName = path.ToString();
             }
             if (ModelState.IsValid)
             {
-                material.Id = Guid.NewGuid();
-                material.Category = Category.Pillows;
-                Size size = new Size
-                {
-                    Id = Guid.NewGuid(),
-                    Height = material.Size.Height,
-                    Width = material.Size.Width
-                };
-                _context.Add(size);
-                material.SizeId = size.Id;
-                _context.Add(material);
+                pillow.Id = Guid.NewGuid();
+                //pillow.Category = Category.Pillows;
+                //Size size = new Size
+                //{
+                //    Id = Guid.NewGuid(),
+                //    Height = pillow.Size.Height,
+                //    Width = pillow.Size.Width
+                //};
+                //_context.Add(pillow);
+                //pillow.SizeId = size.Id;
+                _context.Add(pillow);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -78,43 +78,42 @@ namespace Oguz.Controllers
                 return NotFound();
             }
 
-            var material = await _context.Materials.FindAsync(id);
-            if (material == null)
+            var pillow = await _context.Pillows.FindAsync(id);
+            if (pillow == null)
             {
                 return NotFound();
             }
-            ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "Name", material.BrandId);
-            return View(material);
+            ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "Name", pillow.BrandId);
+            return View(pillow);
         }
 
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Material material, IFormFile image)
+        public async Task<IActionResult> Edit(Pillow pillow, IFormFile image)
         {
             if (image != null)
             {
-                string fileName = material.ImageName;
-                string fullPath = _appEnvironment.ApplicationName + "\\Images\\Pillows\\" + material.ImageName;
+                string fileName = pillow.ImageName;
+                string fullPath = _appEnvironment.ApplicationName + "\\Images\\Pillows\\" + pillow.ImageName;
                 if (System.IO.File.Exists(fullPath))
                 {
                     System.IO.File.Delete(fullPath);
                 }
                 var path = FilesHelper.UploadFile(_appEnvironment.WebRootPath + "\\Images\\Pillows\\", image);
-                material.ImageName = path.ToString();
+                pillow.ImageName = path.ToString();
             }
 
-            material.Category = Category.Pillows;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(material);
+                    _context.Update(pillow);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MaterialExists(material.Id))
+                    if (!MaterialExists(pillow.Id))
                     {
                         return NotFound();
                     }
@@ -125,13 +124,13 @@ namespace Oguz.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(material);
+            return View(pillow);
         }
 
         public IActionResult Delete(Guid? id)
         {
-            var material = _context.Materials.Find(id);
-            var colors = _context.Colors.Where(c => c.MaterialId == id);
+            var pillow = _context.Pillows.Find(id);
+            var colors = _context.Colors.Where(c => c.ProductId == id);
             _context.Colors.RemoveRange(colors);
             foreach (var item in colors)
             {
@@ -141,19 +140,19 @@ namespace Oguz.Controllers
                     System.IO.File.Delete(ColorImagePath);
                 }
             }
-            string MaterialImagePath = _appEnvironment.ApplicationName + "\\Images\\Pillows\\" + material.ImageName;
-            if (System.IO.File.Exists(MaterialImagePath))
+            string PillowImagePath = _appEnvironment.ApplicationName + "\\Images\\Pillows\\" + pillow.ImageName;
+            if (System.IO.File.Exists(PillowImagePath))
             {
-                System.IO.File.Delete(MaterialImagePath);
+                System.IO.File.Delete(PillowImagePath);
             }
-            _context.Materials.Remove(material);
+            _context.Pillows.Remove(pillow);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MaterialExists(Guid id)
         {
-            return _context.Materials.Any(e => e.Id == id);
+            return _context.Pillows.Any(e => e.Id == id);
         }
     }
 }

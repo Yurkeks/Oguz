@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Oguz.Models.Material>
+﻿@model IEnumerable<Oguz.Models.Pillow>
 
 @{
     ViewData["Title"] = "Index";
@@ -45,7 +45,7 @@
                             @Html.DisplayFor(modelItem => item.Brand.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Cost)
+                            @Html.DisplayFor(modelItem => item.Price)
                         </td>
                         <td>
                             @item.Colors.Count |<a asp-controller="Colors" asp-action="Index" asp-route-id="@item.Id"> Редактировать</a>

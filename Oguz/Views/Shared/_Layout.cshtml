@@ -33,10 +33,10 @@
                                 <span class="caret-down"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
                             </a>
                             <div class="dropdown-menu" style="display: none">
-                                <a class="dropdown-item" asp-controller="OrderCurtains" asp-action="Index" asp-category="@Category.Curtains">Шторы</a>
-                                <a class="dropdown-item" asp-controller="OrderCurtains" asp-action="Index" asp-category="@Category.Shades">Гардины</a>
-                                <a class="dropdown-item" asp-controller="" asp-action="Index" asp-category="@Category.Pillows">Подушки</a>
-                                <a class="dropdown-item" asp-controller="" asp-action="Index" asp-category="@Category.Accessories">Акссесуары</a>
+                                <a class="dropdown-item" asp-controller="Shop" asp-action="Curtains">Шторы</a>
+                                @*<a class="dropdown-item" asp-controller="OrderCurtains" asp-action="Index" asp-category="@Category.Shades">Гардины</a>*@
+                                <a class="dropdown-item" asp-controller="Shop" asp-action="Pillows">Подушки</a>
+                                @*<a class="dropdown-item" asp-controller="" asp-action="Index" asp-category="@Category.Accessories">Акссесуары</a>*@
                             </div>
                         </li>
                         <li class="nav-item">

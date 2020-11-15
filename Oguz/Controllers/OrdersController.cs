@@ -42,43 +42,43 @@ namespace Oguz.Controllers
             return View(order);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderExists(order.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(order);
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(Order order)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+        //            _context.Update(order);
+        //            await _context.SaveChangesAsync();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+        //            if (!OrderExists(order.Id))
+        //            {
+        //                return NotFound();
+        //            }
+        //            else
+        //            {
+        //                throw;
+        //            }
+        //        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(order);
+        //}
 
-        public IActionResult Delete(Guid? id)
-        {
-            var order = _context.Orders.Find(id);
-            var sizes = _context.Sizes.Where(c => c.OrderId == id);
+        //public IActionResult Delete(Guid? id)
+        //{
+        //    var order = _context.Orders.Find(id);
+        //    var sizes = _context.Sizes.Where(c => c.OrderId == id);
 
-            _context.Sizes.RemoveRange(sizes);
-            _context.Orders.Remove(order);
-            _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
+        //    _context.Sizes.RemoveRange(sizes);
+        //    _context.Orders.Remove(order);
+        //    _context.SaveChanges();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
         private bool OrderExists(Guid id)
         {

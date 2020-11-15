@@ -1,4 +1,4 @@
-﻿@model Oguz.Models.Material
+﻿@model Oguz.Models.Pillow
 
 @{
     ViewData["Title"] = "Edit";
@@ -29,22 +29,9 @@
                     @Html.TextAreaFor(m => m.Description, new { @class = "col-7 form-control" })
                 </div>
                 <div class="form-group row">
-                    <label class="control-label col-4">Стркуктура: </label>
-                    <input asp-for="FabricStructure" class="form-control col-7" />
-                    <span asp-validation-for="FabricStructure" class="text-danger"></span>
-                </div>
-                <div class="form-group row">
                     <label class="control-label col-4">Стоимость: </label>
-                    <input type="number" asp-for="Cost" class="form-control col-7" required />
-                    <span asp-validation-for="Cost" class="text-danger"></span>
-                </div>
-                <div class="form-group row">
-                    <label class="control-label col-4">Ширина: </label>
-                    <input type="number" asp-for="Size.Width" class="form-control col-7" required />
-                </div>
-                <div class="form-group row">
-                    <label class="control-label col-4">Высота: </label>
-                    <input type="number" asp-for="Size.Height" class="form-control col-7" required />
+                    <input type="number" asp-for="Price" class="form-control col-7" required />
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
                 <div class="form-group row">
                     <label class="control-label col-4">Новое фото: </label>

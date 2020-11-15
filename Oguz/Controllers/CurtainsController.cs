@@ -27,10 +27,10 @@ namespace Oguz.Controllers
         // GET
         public IActionResult Index()
         {
-            var materials = _context.Materials.Where(p => p.Category == Category.Curtains || p.Category == Category.Shades).Include(m => m.Brand).Include(c => c.Colors).ToList();
-            if (materials == null || materials.Count == 0)
+            var curtains = _context.Curtains.Include(c => c.Colors).Include(m => m.Brand).ToList();
+            if (curtains == null || curtains.Count == 0)
                 return RedirectToAction(nameof(Create));
-            return View(materials);
+            return View(curtains);
         }
 
         // GET
@@ -43,17 +43,17 @@ namespace Oguz.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Material material, IFormFile image)
+        public async Task<IActionResult> Create(Curtains curtains, IFormFile image)
         {
             if (image != null)
             {
                 var path = FilesHelper.UploadFile(_appEnvironment.WebRootPath + "\\Images\\Curtains\\", image);
-                material.ImageName = path.ToString();
+                curtains.ImageName = path.ToString();
             }
             if (ModelState.IsValid)
             {
-                material.Id = Guid.NewGuid();
-                _context.Add(material);
+                curtains.Id = Guid.NewGuid();
+                _context.Add(curtains);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -69,42 +69,42 @@ namespace Oguz.Controllers
                 return NotFound();
             }
 
-            var material = await _context.Materials.FindAsync(id);
-            if (material == null)
+            var curtains = await _context.Curtains.FindAsync(id);
+            if (curtains == null)
             {
                 return NotFound();
             }
-            ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "Name", material.BrandId);
-            return View(material);
+            ViewData["BrandId"] = new SelectList(_context.Brands, "Id", "Name", curtains.BrandId);
+            return View(curtains);
         }
 
         // POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Material material, IFormFile image)
+        public async Task<IActionResult> Edit(Curtains curtains, IFormFile image)
         {
             if (image != null)
             {
-                string fileName = material.ImageName;
-                string fullPath = _appEnvironment.ApplicationName + "\\Images\\Curtains\\" + material.ImageName;
+                string fileName = curtains.ImageName;
+                string fullPath = _appEnvironment.ApplicationName + "\\Images\\Curtains\\" + curtains.ImageName;
                 if (System.IO.File.Exists(fullPath))
                 {
                     System.IO.File.Delete(fullPath);
                 }
                 var path = FilesHelper.UploadFile(_appEnvironment.WebRootPath + "\\Images\\Curtains\\", image);
-                material.ImageName = path.ToString();
+                curtains.ImageName = path.ToString();
             }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(material);
+                    _context.Update(curtains);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MaterialExists(material.Id))
+                    if (!CurtainsExists(curtains.Id))
                     {
                         return NotFound();
                     }
@@ -115,14 +115,14 @@ namespace Oguz.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(material);
+            return View(curtains);
         }
 
         // GET
         public IActionResult Delete(Guid? id)
         {
-            var material = _context.Materials.Find(id);
-            var colors = _context.Colors.Where(c => c.MaterialId == id);
+            var curtains = _context.Curtains.Find(id);
+            var colors = _context.Colors.Where(c => c.ProductId == id);
             _context.Colors.RemoveRange(colors);
             foreach (var item in colors)
             {
@@ -132,19 +132,19 @@ namespace Oguz.Controllers
                     System.IO.File.Delete(ColorImagePath);
                 }
             }
-            string MaterialImagePath = _appEnvironment.ApplicationName + "\\Images\\Curtains\\" + material.ImageName;
-            if (System.IO.File.Exists(MaterialImagePath))
+            string CurtainsImagePath = _appEnvironment.ApplicationName + "\\Images\\Curtains\\" + curtains.ImageName;
+            if (System.IO.File.Exists(CurtainsImagePath))
             {
-                System.IO.File.Delete(MaterialImagePath);
+                System.IO.File.Delete(CurtainsImagePath);
             }
-            _context.Materials.Remove(material);
+            _context.Curtains.Remove(curtains);
             _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MaterialExists(Guid id)
+        private bool CurtainsExists(Guid id)
         {
-            return _context.Materials.Any(e => e.Id == id);
+            return _context.Curtains.Any(e => e.Id == id);
         }
     }
 }

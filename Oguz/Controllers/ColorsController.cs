@@ -28,30 +28,30 @@ namespace Oguz.Controllers
         // GET
         public IActionResult Index(Guid id)
         {
-            var colors = _context.Colors.Where(c => c.MaterialId == id).ToList();
+            var colors = _context.Colors.Where(c => c.ProductId == id).ToList();
             if (colors == null || colors.Count == 0)
                 return RedirectToAction("Create", "Colors", new { materialId = id });
 
-            var category = _context.Materials.Find(id).Category;
-            if (category == Category.Accessories)
-                ViewBag.BackUrl = "/Accessories/";
-            if (category == Category.Shades)
-                ViewBag.BackUrl = "/Curtains/";
-            if (category == Category.Pillows)
-                ViewBag.BackUrl = "/Pillows/";
-            if (category == Category.Curtains)
-                ViewBag.BackUrl = "/Curtains/";
-            ViewBag.Category = category.ToString();
+            //var category = _context..Find(id).Category;
+            //if (category == Category.Accessories)
+            //    ViewBag.BackUrl = "/Accessories/";
+            //if (category == Category.Shades)
+            //    ViewBag.BackUrl = "/Curtains/";
+            //if (category == Category.Pillows)
+            //    ViewBag.BackUrl = "/Pillows/";
+            //if (category == Category.Curtains)
+            //    ViewBag.BackUrl = "/Curtains/";
+            //ViewBag.Category = category.ToString();           
             return View(colors);
         }
 
         // GET
-        public IActionResult Create(Guid materialId)
+        public IActionResult Create(Guid productId)
         {
             Color color = new Color()
             {
                 Id = Guid.NewGuid(),
-                MaterialId = materialId
+                ProductId = productId
             };
             return View(color);
         }
@@ -70,7 +70,7 @@ namespace Oguz.Controllers
                 _context.Add(color);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction("Index", "Colors", new { id = color.MaterialId });
+            return RedirectToAction("Index", "Colors", new { id = color.ProductId });
         }
 
 
@@ -133,7 +133,7 @@ namespace Oguz.Controllers
         public IActionResult Delete(Guid? id)
         {
             var color = _context.Colors.Find(id);
-            string ImagePath = _appEnvironment.ApplicationName + "\\Images\\Curtains\\" + color.ImageName;
+            string ImagePath = _appEnvironment.ApplicationName + "\\Images\\Colors\\" + color.ImageName;
             if (System.IO.File.Exists(ImagePath))
             {
                 System.IO.File.Delete(ImagePath);
