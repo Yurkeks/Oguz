@@ -1,8 +1,28 @@
-﻿
+﻿@model Curtains
 @{
     ViewData["Title"] = "Curtains";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Curtains</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="~/Images/Curtains/@Model.ImageName" class="img-fluid" style="min-width:380px"/>
+        </div>
+        <div class="col">
+            <h3>@Model.Name</h3>
+            <div class="">
+                <span>@Model.Brand</span>
+                <span>@Model.Description</span>
+            </div>
+            <div>
+                <span>Цена за погонный метр: @Model.Price</span>
+                <span>Высота: </span>
+                <span>Ширина: </span>
+                <span>Количество полотн: </span>
+                <span>Ваша цена: </span>
+            </div>
 
+        </div>
+    </div>
+</div>

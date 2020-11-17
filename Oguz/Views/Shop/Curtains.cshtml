@@ -6,13 +6,29 @@
 
 
 <div id="app">
-    <div class="container">
-        <template v-for="item in curtainsList">
-            <div class="col-3">
-                <img v-bind:src="item.imageName"class="CurtainsShopPhoto"/>
-                <div>{{ item.name }}</div>
-            </div>
-        </template>
+    <div class="container mt-4">
+
+        <div class="mt-4" style="font-size:16px">
+            <a href="#"> <span class="mr-4 text-black-50">Новые</span> </a>
+            <a href="#"> <span class="text-black-50">Cкидки</span> </a>
+        </div>
+
+
+        <div class="row mt-4">
+            <template v-for="item in curtainsList">
+
+                <div class="col p-0 m-1  position-relative img-hover-zoom" style="min-width: 350px">
+                    <div class="curtainsNameLine text-center">
+                        <span class="pt-2 pl-3 pr-4">{{ item.name }}</span>
+                        <span style="color:forestgreen; font-size:18px"> ${{ item.price }}</span>
+                    </div>
+                    <a v-bind:href="'CurtainsInfo/' + item.id">
+                        <img v-bind:src="item.imageName" class="img-fluid" v-bind:alt="item.name" />
+                    </a>
+                </div>
+            </template>
+        </div>
+
     </div>
 </div>
 
