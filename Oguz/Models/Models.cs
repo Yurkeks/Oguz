@@ -63,21 +63,16 @@ namespace Oguz.Models
 
 
 
+    //public class City : BaseDbObject
+    //{
+    //    public Guid CountryId { get; set; }
+    //    public Country Country { get; set; }
+    //}
 
-
-
-
-
-    public class City : BaseDbObject
-    {
-        public Guid CountryId { get; set; }
-        public Country Country { get; set; }
-    }
-
-    public class Country : BaseDbObject
-    {
-        List<City> Cities { get; set; }
-    }
+    //public class Country : BaseDbObject
+    //{
+    //    List<City> Cities { get; set; }
+    //}
 
     //public class Order : BaseDbObject
     //{
@@ -143,6 +138,7 @@ namespace Oguz.Models
 
     public class Brand : BaseDbObject
     {
+
     }
 
     public class SMTPClient : BaseDbObject

@@ -113,7 +113,7 @@ namespace Oguz.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MaterialExists(pillow.Id))
+                    if (!PillowsExists(pillow.Id))
                     {
                         return NotFound();
                     }
@@ -150,7 +150,7 @@ namespace Oguz.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MaterialExists(Guid id)
+        private bool PillowsExists(Guid id)
         {
             return _context.Pillows.Any(e => e.Id == id);
         }

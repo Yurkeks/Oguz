@@ -17,8 +17,6 @@ namespace Oguz.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<SMTPClient> SMTPClients { get; set; }
         public DbSet<Discount> Discounts { get; set; }
-        public DbSet<City> Cities { get; set; }
-        public DbSet<Country> Countries { get; set; }
         public DbSet<Pillow> Pillows { get; set; }
         public DbSet<Curtains> Curtains { get; set; }
         public DbSet<Product> Products { get; set; }

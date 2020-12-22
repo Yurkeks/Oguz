@@ -1,8 +1,41 @@
-﻿
+﻿@model Pillow
 @{
     ViewData["Title"] = "Pillows";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Pillows</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a href="~/Images/Pillows/@Model.ImageName" class="zoom" style="min-width:450px">
+                <img src="~/Images/Pillows/@Model.ImageName" class="img-fluid" style="max-width:380px" />
+            </a>
+        </div>
+        <div class="col">
+            <h3>@Model.Name</h3>
+            <div class="">
+                <span>@Model.Brand</span>
+                <span>@Model.Description</span>
+            </div>
+            <div>
+                <span>Цена за погонный метр: @Model.Price</span>
+                <span>Высота: </span>
+                <span>Ширина: </span>
+                <span>Количество полотен: </span>
+                <span>Ваша цена: </span>
+            </div>
+        </div>
+    </div>
+</div>
 
+@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>*@
+<script type="text/jаvascript" src="~/js/jquery.zoomy0.5.min.js"></script>
+<script type="text/jаvascript" src="~/js/jquery.zoomy0.5.js"></script>
+<script type="text/jаvascript" src="D:\DB\Oguz\Oguz\Oguz\wwwroot\js\jquery.zoomy0.5.js"></script>
+
+<script>
+    $(function () {
+        $('.zoom').zoomy();
+    });
+    //$('.zoom').zoomy({ zoomSize: 200 });
+</script>
