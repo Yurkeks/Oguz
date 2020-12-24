@@ -3,11 +3,11 @@
     ViewData["Title"] = "Curtains";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<
 <div class="container">
     <div class="row">
         <div class="col">
-            <img src="~/Images/Curtains/@Model.ImageName" class="img-fluid" style="min-width:380px"/>
+            <img src="~/Images/Curtains/@Model.ImageName" class="img-fluid" style="min-width:380px" />
         </div>
         <div class="col">
             <h3>@Model.Name</h3>
@@ -15,14 +15,35 @@
                 <span>@Model.Brand</span>
                 <span>@Model.Description</span>
             </div>
-            <div>
-                <span>Цена за погонный метр: @Model.Price</span>
-                <span>Высота: </span>
-                <span>Ширина: </span>
-                <span>Количество полотн: </span>
-                <span>Ваша цена: </span>
+            <div id="curtainsSizes" class="mt-4">
+                <div>Цена за метр: @Model.Price</div>
+                <div class="row ml-3 mt-2" id="sizesRow1">
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Высота" />
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Ширина" />
+                    <input min="0" class="form-control mr-3" placeholder="Стоимость" readonly />
+                </div>
+                <div class="row ml-3 mt-2" id="sizesRow2" :disabled="ShowSizes2==false">
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Высота" />
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Ширина" />
+                    <input min="0" class="form-control mr-3" placeholder="Стоимость" readonly />
+                </div>
+                <div class="row ml-3 mt-2" id="sizesRow3" :disabled="ShowSizes3==0">
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Высота" />
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Ширина" />
+                    <input min="0" class="form-control mr-3" placeholder="Стоимость" readonly />
+                </div>
+                <div class="row ml-3 mt-2" id="sizesRow4" :disabled="ShowSizes4==0">
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Высота" />
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Ширина" />
+                    <input min="0" class="form-control mr-3" placeholder="Стоимость" readonly />
+                </div>
+                <div class="row ml-3 mt-2" id="sizesRow5" :disabled="ShowSizes5==0">
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Высота" />
+                    <input type="number" min="0" class="form-control mr-3" placeholder="Ширина" />
+                    <input min="0" class="form-control mr-3" placeholder="Стоимость" readonly />
+                </div>
+                <button v-on:click="sizesPlusEvent">+</button>
             </div>
-
         </div>
     </div>
 </div>

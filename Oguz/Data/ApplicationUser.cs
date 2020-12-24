@@ -12,7 +12,7 @@ namespace Oguz.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Guid CityId { get; set; }
-        public City City { get; set; }
+        public string City { get; set; }
         public int PostCode { get; set; }
         public int Amount { get; set; }
         public bool IsSubscribe { get; set; }

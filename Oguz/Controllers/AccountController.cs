@@ -16,14 +16,17 @@ namespace Oguz.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationDbContext context)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+            ApplicationDbContext context, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
         }
-
+        
         [HttpGet]
         public IActionResult Register()
         {
@@ -41,28 +44,24 @@ namespace Oguz.Controllers
                 }
                 else
                 {
-                    City city = _context.Cities.FirstOrDefault(c => c.Name == model.City);
-                    if (city == null)
+                    ApplicationUser user = new ApplicationUser
                     {
-                        City newCity = new City {Name = model.City};
-                        newCity.CountryId = _context.Countries.FirstOrDefault(c => c.Name == "Украина").Id;
-                        await _context.Cities.AddAsync(newCity);
-                        await _context.SaveChangesAsync();
-                        city = newCity;
-                    }
-                    ApplicationUser user = new ApplicationUser { Email = model.Email, UserName = model.Email, City = city, FirstName = model.FirstName, PostCode = model.PostCode };
+                        Email = model.Email,
+                        UserName = model.Email,
+                        EmailConfirmed = true
+                    };
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, false);
-                        //return RedirectToAction("Index", "Home");
-                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: HttpContext.Request.Scheme);
-                        EmailService emailService = new EmailService();
-                        await emailService.SendEmailAsync(model.Email, "Confirm your account",
-                            $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
+                        return RedirectToAction("Index", "Home");
+                        //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: HttpContext.Request.Scheme);
+                        //EmailService emailService = new EmailService();
+                        //await emailService.SendEmailAsync(model.Email, "Confirm your account",
+                        //    $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
 
-                        return Content("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
+                        //return Content("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
                     }
                     else
                     {
@@ -71,6 +70,7 @@ namespace Oguz.Controllers
                             ModelState.AddModelError(string.Empty, error.Description);
                         }
                     }
+                    await _userManager.AddToRoleAsync(user, "user");
                 }
             }
             return View(model);

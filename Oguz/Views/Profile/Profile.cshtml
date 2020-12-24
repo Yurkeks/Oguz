@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Profile</h1>
+
+<div id="profileId">
+    <div id="search-profile-menu">
+        <div class="profile-menu-header">
+            <span>Личный кабинет</span>
+        </div>
+        <div id="profile-menu-list">
+            <b-container fluid>
+                <b-list-group>
+                    <b-list-group-item v-for="(menuItem, index) in filteredList" :key="menuItem.id"
+                                       v-bind:class="{'active':isSelected(menuItem.id)}" v-on-click="setSelected(menuItem)">
+                        <span>{{index+1}}. {{menuItem.name}}</span>
+                    </b-list-group-item>
+                </b-list-group>
+            </b-container>
+        </div>
+    </div>
+    <b-container id="items-body" fluid>
+        <component v-bind:is="component"></component>
+    </b-container>
+
+</div>
+
+@Html.PartialAsync("~/Views/Profile/Components.cshtml");
+@*@section Scripts{*@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="~/js/Profile/FullMenuList.js"></script>
+<script src="~/js/Profile/Components.js"></script>
+<script src="~/js/Profile/Profile.js"></script>
+@*}*@

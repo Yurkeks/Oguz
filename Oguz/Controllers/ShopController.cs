@@ -34,7 +34,8 @@ namespace Oguz.Controllers
         }
         public IActionResult PillowsInfo(Guid id)
         {
-            return View();
+            var result = _context.Pillows.FirstOrDefault(u => u.Id == id);
+            return View(result);
         }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oguz.Data;
 
 namespace Oguz.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201202132952_UpdateRegistration")]
+    partial class UpdateRegistration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,6 +243,31 @@ namespace Oguz.Migrations
                     b.ToTable("Brands");
                 });
 
+            modelBuilder.Entity("Oguz.Models.City", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("CountryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
+
+                    b.ToTable("Cities");
+                });
+
             modelBuilder.Entity("Oguz.Models.Color", b =>
                 {
                     b.Property<Guid>("Id")
@@ -267,6 +294,26 @@ namespace Oguz.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Colors");
+                });
+
+            modelBuilder.Entity("Oguz.Models.Country", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("Oguz.Models.Discount", b =>
@@ -411,9 +458,6 @@ namespace Oguz.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid>("CityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -428,6 +472,8 @@ namespace Oguz.Migrations
 
                     b.Property<int>("PostCode")
                         .HasColumnType("int");
+
+                    b.HasIndex("CityId");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
@@ -497,6 +543,15 @@ namespace Oguz.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Oguz.Models.City", b =>
+                {
+                    b.HasOne("Oguz.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Oguz.Models.Color", b =>
                 {
                     b.HasOne("Oguz.Models.Product", "Product")
@@ -520,6 +575,15 @@ namespace Oguz.Migrations
                     b.HasOne("Oguz.Models.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Oguz.Data.ApplicationUser", b =>
+                {
+                    b.HasOne("Oguz.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

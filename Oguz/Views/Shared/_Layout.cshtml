@@ -9,8 +9,15 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/Animation.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="~/css/zoomy0.5.css" />*@
+    <link type="text/css" rel="stylesheet" href="~/css/zoomy0.5.css" />
+    @*<script type="text/javascript" src="https://www.03www.ru/2013-04/88/jquery.zoomy0.5.js"></script>*@
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://www.03www.ru/2013-04/jquery.js"></script>
+    <script src="~/js/site.js"></script>
 </head>
 <body>
     <div id="preloader">
@@ -77,7 +84,7 @@
                                 </div>
                             </li>
                         }
-                        @*<li class="navbar-right">
+                        <li class="navbar-right">
                             <div class="basket pl-3">
                                 <a href="/" class="basket-icon">
                                     <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
@@ -85,7 +92,19 @@
                                 </a>
                                 <div id="basket-sum">$0.00</div>
                             </div>
-                        </li>*@
+                        </li>
+                        <li class="dropdown">
+                            <a class="text-dark" asp-controller="Profile" asp-action="Profile" style="margin-left:15px">
+                                Мой профиль
+                                <span class="caret-down"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+                            </a>
+                            <div class="dropdown-menu" style="display: none">
+                                <a class="dropdown-item" asp-controller="" asp-action="">Данные</a>
+                                <a class="dropdown-item" asp-controller="Orders" asp-action="Index">Заказы</a>
+                                <a class="dropdown-item" asp-controller="Discounts" asp-action="DiscountExists">Мои скидки</a>
+                                <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Выйти</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </nav>
