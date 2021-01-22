@@ -4,34 +4,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Profile</h1>
-
-<div id="profileId">
-    <div id="search-profile-menu">
-        <div class="profile-menu-header">
-            <span>Личный кабинет</span>
+<div id="profileId" class="container">
+    <div class="row">
+        <div class="col-2" style="margin-top:75px">
+            <ul v-for="tab in tabs">
+                <li v-bind:key="tab"
+                        v-bind:class="['tab-button', { active: currentTab === tab }]"
+                        v-on:click="currentTab = tab">
+                    {{ tab.name }}
+                </li>
+            </ul>
+            
         </div>
-        <div id="profile-menu-list">
-            <b-container fluid>
-                <b-list-group>
-                    <b-list-group-item v-for="(menuItem, index) in filteredList" :key="menuItem.id"
-                                       v-bind:class="{'active':isSelected(menuItem.id)}" v-on-click="setSelected(menuItem)">
-                        <span>{{index+1}}. {{menuItem.name}}</span>
-                    </b-list-group-item>
-                </b-list-group>
-            </b-container>
+        <div class="col-10">
+            <component v-bind:is="currentTabComponent" class="tab mt-3 pt-3" style="margin-left:40px; padding-left: 50px"></component>
         </div>
     </div>
-    <b-container id="items-body" fluid>
-        <component v-bind:is="component"></component>
-    </b-container>
-
 </div>
 
-@Html.PartialAsync("~/Views/Profile/Components.cshtml");
-@*@section Scripts{*@
-<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
 <script src="~/js/Profile/FullMenuList.js"></script>
-<script src="~/js/Profile/Components.js"></script>
 <script src="~/js/Profile/Profile.js"></script>
-@*}*@
+<script src="~/js/Profile/Components.js"></script>

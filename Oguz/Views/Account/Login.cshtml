@@ -4,47 +4,27 @@
     ViewData["Title"] = "Вход";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<div class="row pt-30px">
-        <div class="col-md-6">
-            <h2>Вход в аккаунт</h2>
-            <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
-                <div asp-validation-summary="ModelOnly"></div>
-                <div>
-                    <label>Email</label><br />
-                    <input asp-for="Email" />
-                    <span asp-validation-for="Email"></span>
-                </div>
-                <div>
-                    <label>Пароль</label><br />
-                    <input asp-for="Password" />
-                    <span asp-validation-for="Password"></span>
-                </div>
-                <div>
-                    <label>Запомнить пароль?</label><br />
-                    <input asp-for="RememberMe" />
-                </div>
-                <div>
-                    <input type="submit" value="Войти" />
-                </div>
-            </form>
-        </div>
-    </div>*@
 
-<div class="container">
-    <div class="row">
-        <div class="loginContainer">
-
-            <div class="ml-2 mb-4">
-                <div class="centr-container"><h2>@ViewBag.Title</h2></div>
+<div id="loginContainer" class="container-fluid mt-70" >
+    <div class="loginContainer">
+        <div class="row p-0 mb-4">
+            <div class="width50per" v-bind:class="{ selectedLR: isLoginActive }" v-on:click="switchToLogin">
+                <div class="centr-container"><h3>@ViewBag.Title</h3></div>
             </div>
+            <div class="width50per" v-bind:class="{ selectedLR: isRegisterActive}" v-on:click="switchToRegistrtion">
+                <div class="centr-container"><h3>Регистрация</h3></div>
+            </div>
+        </div>
 
-            <section id="loginForm">
-                <form method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+
+        <div id="loginForm" class="mt-4 pt-2">
+            <div id="login" class="mt-4 pt-4" v-if="login">
+                <form name="login" method="post" asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
                     @Html.AntiForgeryToken()
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group col">
                         <div class="inputWithIcon">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", placeholder = "Email" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control mw-300", type = "email", placeholder = "Email" })
                             <i class="fa fa-envelope fa-lg fa-fw email-icon" aria-hidden="true"></i>
                         </div>
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
@@ -56,24 +36,55 @@
                         </div>
                         @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group col ml-4 pl-3">
-                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "remember-checkbox scale-140-per ml-3" })
-                        @Html.LabelFor(m => m.RememberMe, "Запомнить меня", new { @class = "mt-0 pl-4 f-16" })
-                    </div>
+                    @*<div class="form-group col ml-4 pl-3">
+                            @Html.CheckBoxFor(m => m.RememberMe, new { @class = "remember-checkbox scale-140-per ml-3" })
+                            @Html.LabelFor(m => m.RememberMe, "Запомнить меня", new { @class = "mt-0 pl-4 f-16" })
+                        </div>*@
 
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <div class="centr-container">
                             <input type="submit" value="Войти" class="loginButton" />
                         </div>
                     </div>
-                    <div class="sign-up">
+                    @*<div class="sign-up">
                         <p>Ещё нет аккаунта? @Html.ActionLink("Регистрация", "Register")</p>
-                    </div>
+                        /div>*@
                     <div class="sign-up">
                         @Html.ActionLink("Восстановить пароль", "ForgotPassword")
                     </div>
                 </form>
-            </section>
+            </div>
+
+            <div class="mt-4 ml-3" v-if="register">
+                <form name="register" method="post" asp-controller="Account" asp-action="Register">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group row pt-4">
+                        <label class="control-label col-4">Email: </label>
+                        <input asp-for="Email" type="email" class="form-control col-7" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-4">Пароль: </label>
+                        <input asp-for="Password" class="form-control col-7" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="control-label col-4">Повтор пароля: </label>
+                        <input asp-for="PasswordConfirm" class="form-control col-7" />
+                        <span asp-validation-for="PasswordConfirm" class="text-danger"></span>
+                    </div>
+
+                    <div class="centr-container">
+                        <input type="submit" value="Отправить" />
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="~/js/Account/Login.js"></script>

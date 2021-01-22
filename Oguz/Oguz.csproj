@@ -22,4 +22,9 @@
     <PackageReference Include="MimeKit" Version="2.8.0" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\Tabulator\" />
+  </ItemGroup>
+
 </Project>

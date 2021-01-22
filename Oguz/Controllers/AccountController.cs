@@ -54,7 +54,6 @@ namespace Oguz.Controllers
                     if (result.Succeeded)
                     {
                         await _signInManager.SignInAsync(user, false);
-                        return RedirectToAction("Index", "Home");
                         //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                         //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, protocol: HttpContext.Request.Scheme);
                         //EmailService emailService = new EmailService();
@@ -62,6 +61,8 @@ namespace Oguz.Controllers
                         //    $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
 
                         //return Content("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
+                        await _userManager.AddToRoleAsync(user, "user");
+                        return RedirectToAction("Index", "Home");
                     }
                     else
                     {
@@ -70,7 +71,6 @@ namespace Oguz.Controllers
                             ModelState.AddModelError(string.Empty, error.Description);
                         }
                     }
-                    await _userManager.AddToRoleAsync(user, "user");
                 }
             }
             return View(model);

@@ -18,6 +18,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="https://www.03www.ru/2013-04/jquery.js"></script>
     <script src="~/js/site.js"></script>
+
+    <script src="https://unpkg.com/vue@latest"></script>
+    <link href="https://unpkg.com/tabulator-tables@4.4.1/dist/css/tabulator.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.4.1/dist/js/tabulator.min.js"></script>
+    <script src="https://unpkg.com/vue-tabulator@latest"></script>
 </head>
 <body>
     <div id="preloader">
@@ -32,7 +37,7 @@
                     </div>
                     <ul class="nav navbar-center">
                         <li class="nav-item">
-                            <a class=" text-dark" asp-area="" asp-controller="Home" asp-action="Swatches">Образцы</a>
+                            <a class=" text-dark" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
                         </li>
                         <li class="dropdown">
                             <a class=" text-dark" href="#">
@@ -47,9 +52,6 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Скидки</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="text-dark" asp-area="" asp-controller="Home" asp-action="Contacts">Контакты</a>
                         </li>
                     </ul>
@@ -58,13 +60,13 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="dropdown  navbar-right">
-                                <a class=" text-dark" href="#">
+                                <a class=" text-dark" asp-controller="Profile" asp-action="Profile">
                                     @User.Identity.Name
                                     <span class="caret-down"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
                                 </a>
                                 <div class="dropdown-menu" style="display: none">
-                                    <a class="dropdown-item" asp-controller="Account" asp-action="Profile">Профиль</a>
-                                    <a class="dropdown-item" asp-controller="Account" asp-action="Orders" asp-category="@Category.Pillows">Мои заказы</a>
+                                    <a class="dropdown-item" asp-controller="Profile" asp-action="Profile">Профиль</a>
+                                    <a class="dropdown-item" asp-controller="Profile" asp-action="Orders" asp-category="@Category.Pillows">Мои заказы</a>
                                     <a class="dropdown-item" asp-controller="Account" asp-action="Logout" asp-category="@Category.Accessories">Выйти</a>
                                 </div>
                             </li>
@@ -78,13 +80,10 @@
                                             <input type="button" value="Войти" />
                                         </a>
                                     </div>
-                                    <div class="pl-3 pr-2">
-                                        <a asp-controller="Account" asp-action="Register">Регистрация</a>
-                                    </div>
                                 </div>
                             </li>
                         }
-                        <li class="navbar-right">
+                        @*<li class="navbar-right">
                             <div class="basket pl-3">
                                 <a href="/" class="basket-icon">
                                     <i class="fa fa-shopping-cart fa-2x" aria-hidden="true"></i>
@@ -104,7 +103,7 @@
                                 <a class="dropdown-item" asp-controller="Discounts" asp-action="DiscountExists">Мои скидки</a>
                                 <a class="dropdown-item" asp-controller="Account" asp-action="Logout">Выйти</a>
                             </div>
-                        </li>
+                        </li>*@
                     </ul>
                 </div>
             </nav>
@@ -126,22 +125,20 @@
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <ul class="navbar-nav d-flex">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Образцы</a>
-                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-dark dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                                     Купить
                                 </a>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                            </li>
+                            <li>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" asp-controller="CurtainsOrder" asp-action="Index" asp-category="@Category.Curtains">Шторы</a>
                                     <a class="dropdown-item" asp-controller="CurtainsOrder" asp-action="Index" asp-category="@Category.Shades">Гардины</a>
                                     <a class="dropdown-item" asp-controller="" asp-action="Index" asp-category="@Category.Pillows">Подушки</a>
                                     <a class="dropdown-item" asp-controller="" asp-action="Index" asp-category="@Category.Accessories">Акссесуары</a>
                                 </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Скидки</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contacts">Контакты</a>
@@ -151,12 +148,10 @@
                 </div>
             </nav>
         </div>
-    </header>
-    <div class="">
-        <main role="main">
+        <div class="container-fluid">
             @RenderBody()
-        </main>
-    </div>
+        </div>
+    </header>
 
     <footer class="footer text-muted">
         @*<div class="subscribe">
@@ -206,7 +201,7 @@
             </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/preloader.js"></script>
     <script src="~/js/Subscribe.js"></script>
